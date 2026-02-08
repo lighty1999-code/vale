@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fdf2f8">
+    <title>For My Valentine | A Special Surprise</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Configuration for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        valentine: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Fredoka', 'sans-serif'],
+                        hand: ['Dancing Script', 'cursive'],
+                        body: ['Nunito', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes sealCrack {
+            0% {
+                transform: translate(-50%, -20%) scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(-50%, -20%) scale(1.1) rotate(-4deg);
+            }
+
+            50% {
+                transform: translate(-50%, -20%) scale(0.95) rotate(3deg);
+            }
+
+            75% {
+                transform: translate(-50%, -20%) scale(1.05) rotate(-2deg);
+            }
+
+            100% {
+                transform: translate(-50%, -20%) scale(1) rotate(0deg);
+            }
+        }
+
+        .seal-crack {
+            @keyframes sealDrop {
+                0% {
+                    transform: translate(-50%, -20%) scale(1);
+                    opacity: 1;
+                }
+
+                60% {
+                    transform: translate(-50%, 10%) scale(0.95);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translate(-50%, 40%) scale(0.9);
+                    opacity: 0;
+                }
+            }
+
+            .seal-drop {
+                animation: sealDrop 0.6s ease forwards;
+            }
+
+        }
+
+
+        /* --- Global Styles --- */
+        body {
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+            background-color: #fff1f2;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23f43f5e" stroke="white" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>') 12 12, auto;
+        }
+
+        /* Hide all scrollbars */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fff1f2;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #fda4af;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fb7185;
+        }
+
+        /* --- Background Floating Hearts (The "Boing" Effect) --- */
+        #floating-hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-heart {
+            position: absolute;
+            bottom: -100px;
+            color: rgba(244, 63, 94, 0.2);
+            /* Transparent Valentine-500 */
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+            animation: floatUpSway linear infinite;
+        }
+
+        @keyframes floatUpSway {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateY(-50vh) translateX(25px) scale(1);
+            }
+
+            100% {
+                transform: translateY(-110vh) translateX(-25px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* --- Iris Wipe Heart Transition Overlay --- */
+        #iris-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: circle(0% at 50% 50%);
+            background: radial-gradient(circle, #f43f5e 0%, #9f1239 100%);
+            transition: clip-path 0.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s ease-out;
+            opacity: 1;
+        }
+
+        #iris-overlay.expanding {
+            pointer-events: all;
+            clip-path: circle(150% at 50% 50%);
+        }
+
+        #iris-overlay.fading {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- Formal Fade Transition Overlay --- */
+        #fade-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #fff1f2;
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        #fade-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* =========================
+   NEW LETTER / ENVELOPE SYSTEM (UPDATED SIZE & POP)
+   ========================= */
+
+        .envelope-wrapper {
+            position: relative;
+            /* Size kept same as requested (to fit screen properly), images scale up instead */
+            width: 360px;
+            height: 240px;
+            margin: 0 auto;
+            perspective: 1000px;
+            cursor: pointer;
+            z-index: 40;
+            /* Ensure envelope is above background */
+        }
+
+        @media (max-width: 400px) {
+            .envelope-wrapper {
+                width: 300px;
+                height: 200px;
+            }
+        }
+
+        .envelope-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #be123c;
+            border-radius: 0 0 10px 10px;
+            z-index: 10;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+        }
+
+        .flap-triangle {
+            width: 100%;
+            height: 100%;
+            background: #f43f5e;
+            clip-path: polygon(0 0, 100% 0, 50% 60%);
+        }
+
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 15;
+        }
+
+        .pocket-triangle {
+            width: 100%;
+            height: 100%;
+            background: #e11d48;
+            clip-path: polygon(0 100%, 50% 55%, 100% 100%);
+        }
+
+        .pocket-left {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #be123c;
+            clip-path: polygon(0 0, 0 100%, 50% 55%);
+        }
+
+        .pocket-right {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #be123c;
+            clip-path: polygon(100% 0, 100% 100%, 50% 55%);
+        }
+
+        .letter-content {
+            position: absolute;
+            bottom: 10px;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            background: #fff;
+            /* Added z-index transition to handle the "pop" in front */
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0.1s;
+            z-index: 5;
+            /* Initially inside pocket (5 < 10) */
+            border-radius: 6px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .letter-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* keeps original proportions */
+            background: white;
+            /* optional, fills empty space */
+        }
+
+
+        /* Close Button inside letter */
+        .letter-close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #f43f5e;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 60;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #9f1239, #881337);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fecdd3;
+            z-index: 25;
+        }
+
+        /* --- Envelope Animations --- */
+
+        /* 1. Flap Opens */
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        /* 2. Letter Slides Up (Standard Open) */
+        .envelope-wrapper.open .letter-content {
+            transform: translateY(-100px);
+            z-index: 5;
+            /* Still inside pocket initially */
+        }
+
+        /* 3. Letter Pops In Front (Applied via JS delay) */
+        .envelope-wrapper .letter-content.popped {
+            /* INCREASED SCALE for Bigger Images */
+            transform: translateY(-140px) scale(1.4);
+            z-index: 50;
+            /* Z-index > Flap(20) & Wrapper */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Show close button when popped */
+        .envelope-wrapper .letter-content.popped .letter-close-btn {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Letter Overlay (Click outside to close) */
+        #letter-overlay-bg {
+            position: absolute;
+            inset: -100vh;
+            /* Cover huge area */
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 35;
+            /* Below popped letter (50), above envelope (10) */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        #letter-overlay-bg.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* FULL SCREEN LETTER (Unused in this version, using pop-out style) */
+        #letter-viewer {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .5s ease;
+        }
+
+        #letter-viewer.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .paper-texture {
+            background-color: #fdf6e3;
+        }
+
+        /* --- Utilities --- */
+        .hidden-page {
+            display: none !important;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .music-bar {
+            height: 100%;
+            width: 4px;
+            background: #f43f5e;
+            border-radius: 2px;
+            animation: equalize 1s infinite alternate;
+        }
+
+        @keyframes equalize {
+            0% {
+                height: 20%;
+            }
+
+            100% {
+                height: 100%;
+            }
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: #fda4af;
+            border-radius: 2px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: right;
+            align-items: flex-end;
+        }
+
+        .timeline-dot {
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.5);
+            background-color: #e11d48;
+            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.3);
+        }
+
+        /* Polaroid */
+        .polaroid {
+            background: white;
+            padding: 1rem 1rem 3rem 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            position: relative;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 20;
+        }
+
+        /* Smooth Button */
+        #no-btn {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+        }
+
+        /* --- Premium Overhaul Styles --- */
+
+        /* Grain Texture Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Cosmic Canvas */
+        #cosmic-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Behind everything */
+            background: radial-gradient(circle at center, #fff1f2 0%, #ffe4e6 100%);
+        }
+
+        /* Premium Glass Panel */
+        .glass-panel-premium {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow:
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 2px 4px -1px rgba(0, 0, 0, 0.03),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+        }
+
+        /* 3D Tilt Effect Utility */
+        .tilt-card {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .tilt-card-content {
+            transform: translateZ(20px);
+        }
+
+        /* Celebration Hearts */
+        .celebration-heart {
+            position: absolute;
+            bottom: -50px;
+            color: #f43f5e;
+            animation: floatUp linear forwards;
+            z-index: 5;
+        }
+
+        /* Hide Scrollbar */
+        #timeline-scroll-area::-webkit-scrollbar {
+            display: none;
+        }
+
+        #timeline-scroll-area {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite ease-in-out;
+        }
+
+        /* Hidden page - ensures pages are fully hidden and don't bleed through */
+        .hidden-page {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        @keyframes ken-burns {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.1) translate(-2%, -2%);
+            }
+
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
+        .animate-ken-burns {
+            animation: ken-burns 20s ease-in-out infinite alternate;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 200px;
+            grid-auto-flow: dense;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 240px;
+            }
+        }
+
+        /* Romantic Floating Memories */
+        @keyframes float-memory {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(var(--rotate));
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(var(--rotate));
+            }
+        }
+
+        @keyframes gentle-sway {
+
+            0%,
+            100% {
+                transform: rotate(var(--rotate));
+            }
+
+            50% {
+                transform: rotate(calc(var(--rotate) + 3deg));
+            }
+        }
+
+        @keyframes fade-in-memory {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotate(var(--rotate)) scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(var(--rotate)) scale(1);
+            }
+        }
+
+        .polaroid-memory {
+            --rotate: 0deg;
+            animation: fade-in-memory 0.8s ease-out forwards,
+                float-memory 12s ease-in-out infinite;
+            animation-delay: var(--delay), 1s;
+            opacity: 0;
+        }
+
+        .polaroid-memory:hover {
+            z-index: 100 !important;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+        }
+
+        /* Romantic bokeh particles */
+        @keyframes float-bokeh {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        /* ========================================
+           MOBILE OPTIMIZATIONS
+           ======================================== */
+
+        @media (max-width: 640px) {
+
+            /* Touch Target Improvements - Minimum 44x44px */
+            button,
+            .cursor-pointer,
+            [onclick] {
+                min-width: 44px;
+                min-height: 44px;
+                padding: 0.75rem 1.5rem;
+            }
+
+            /* Larger back buttons for easy tapping */
+            button[onclick*="navigateTo"] i {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            /* Simplified Polaroid Layout for Mobile */
+            .polaroid-memory {
+                position: static !important;
+                margin: 1rem auto !important;
+                width: 85vw !important;
+                max-width: 320px !important;
+                float: none !important;
+            }
+
+            /* Mobile Polaroid Container - Vertical Scroll Instead of Scattered */
+            #polaroid-container {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                min-height: auto !important;
+                padding-bottom: 2rem;
+            }
+
+            /* Reduce Floating Hearts on Mobile for Performance */
+            .floating-heart:nth-child(n+8) {
+                display: none;
+            }
+
+            /* Envelope adjustments */
+            .envelope-wrapper {
+                width: 280px !important;
+                height: 200px !important;
+            }
+
+            .envelope-wrapper .letter-content.popped {
+                transform: translateY(-120px) scale(1.2) !important;
+            }
+
+            /* Typography - Larger for readability */
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 2rem !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+
+            /* Dashboard cards touch-friendly size */
+            .tilt-card {
+                min-height: 120px;
+                padding: 1.5rem !important;
+            }
+
+            /* Timeline - Better mobile scrolling */
+            #timeline-scroll-area {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Lightbox adjustments */
+            #lightbox-img {
+                max-height: 60vh !important;
+            }
+
+            /* Close buttons larger */
+            .letter-close-btn {
+                width: 44px !important;
+                height: 44px !important;
+                top: -10px !important;
+                right: -10px !important;
+            }
+
+            /* Love Jar responsive */
+            .relative.w-64 {
+                width: 200px !important;
+                height: 280px !important;
+            }
+
+            /* Reduce animations on mobile for performance */
+            .animate-ken-burns {
+                animation: none !important;
+            }
+
+            /* Bokeh particles - fewer and less intensive */
+            #romantic-bokeh {
+                opacity: 0.2 !important;
+            }
+
+            /* Proposal buttons stack vertically on very small screens */
+            @media (max-width: 400px) {
+                .flex-row {
+                    flex-direction: column !important;
+                }
+
+                #yes-btn,
+                #no-btn {
+                    width: 100%;
+                    max-width: 280px;
+                }
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .polaroid-memory {
+                width: 220px !important;
+            }
+
+            #polaroid-container {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+                padding: 2rem !important;
+            }
+
+            .polaroid-memory {
+                position: static !important;
+                margin: 0 auto !important;
+            }
+        }
+    </style>
+</head>
+
+<div id="prank-overlay" class="fixed inset-0 z-[55] flex items-center justify-center hidden">
+    <img src="001.png" class="w-64 animate-wiggle">
+</div>
+
+
+<body class="text-gray-800 antialiased selection:bg-pink-200 selection:text-pink-900">
+
+    <!-- AUDIO ASSETS -->
+    <audio id="song1" src="song1.mp3" preload="auto" loop></audio>
+    <audio id="song2" src="song2.mp3" preload="auto" loop></audio>
+    <audio id="song3" src="song3.mp3" preload="auto" loop></audio>
+    <audio id="song4" src="song4.mp3" preload="auto" loop></audio>
+    <!-- Song 5 for Real Letter (Loop) -->
+    <audio id="song5" src="song5.mp3" preload="auto" loop></audio>
+    <!-- Song 6 for Prank/First Image (No Loop) -->
+    <audio id="song6" src="song6.mp3" preload="auto"></audio>
+
+    <!-- COSMIC BACKGROUND -->
+    <canvas id="cosmic-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- GRAIN OVERLAY -->
+    <div class="grain-overlay"></div>
+
+    <!-- FLOATING HEARTS BACKGROUND -->
+    <div id="floating-hearts-container"></div>
+
+    <!-- LOADING SCREEN (Premium Cosmic) -->
+    <div id="loading-screen"
+        class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-b from-valentine-50 via-valentine-100 to-valentine-200 transition-opacity duration-1000">
+        <!-- Animated Background Orbs -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-1/4 left-1/4 w-96 h-96 bg-valentine-300/30 rounded-full blur-3xl animate-pulse-slow">
+            </div>
+            <div
+                class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-pink-300/30 rounded-full blur-3xl animate-pulse-slow">
+            </div>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+            <div class="relative w-32 h-32 mb-8">
+                <div class="absolute inset-0 rounded-full bg-valentine-500/20 animate-ping"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-valentine-300/50 animate-pulse"></div>
+                <div
+                    class="absolute inset-4 rounded-full border-4 border-transparent border-t-valentine-500 animate-spin">
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i data-lucide="heart"
+                        class="w-16 h-16 text-valentine-500 fill-valentine-500 animate-heartbeat drop-shadow-lg"></i>
+                </div>
+            </div>
+
+            <h2 id="loading-text"
+                class="text-3xl md:text-4xl font-display font-bold text-valentine-700 mb-4 tracking-wide text-center">
+                Preparing Your Surprise</h2>
+
+            <!-- Styled Progress Bar -->
+            <div class="w-72 h-2 bg-white/50 rounded-full overflow-hidden shadow-inner backdrop-blur-sm mt-4">
+                <div id="loading-bar"
+                    class="h-full bg-gradient-to-r from-valentine-400 via-valentine-500 to-pink-500 w-0 transition-all duration-[3000ms] ease-out relative">
+                    <div class="absolute inset-0 bg-white/30 animate-shimmer" style="background-size: 200% 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IRIS WIPE OVERLAY -->
+    <div id="iris-overlay" class="hidden-page">
+        <div class="flex flex-col items-center text-white">
+            <i data-lucide="heart" class="w-20 h-20 animate-pulse fill-white"></i>
+            <p class="mt-4 font-hand text-2xl tracking-widest">...</p>
+        </div>
+    </div>
+
+    <!-- NORMAL FADE OVERLAY -->
+    <div id="fade-overlay"></div>
+
+
+    <!-- GAME OVER SCREEN -->
+    <div id="page-game-over"
+        class="hidden-page fixed inset-0 bg-black z-[80] flex flex-col items-center justify-center text-white overflow-hidden p-6">
+        <div
+            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 animate-pulse">
+        </div>
+        <div id="game-over-content" class="text-center flex flex-col items-center relative z-10">
+            <div class="mb-6 relative">
+                <i data-lucide="heart-off"
+                    class="w-12 h-12 text-valentine-600 absolute bottom-0 right-0 animate-ping"></i>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-valentine-600 mb-4 tracking-widest uppercase glitch-effect"
+                style="text-shadow: 2px 2px 0px #fff;">CHUP CHAP YES KAR</h1>
+            <p class="text-2xl md:text-3xl text-gray-300 font-bold tracking-wider mb-8 font-hand">nahi toh 🔪🔪🔪</p>
+            <div id="game-over-btn-container" class="mt-8 hidden fade-in">
+                <button onclick="handleGameOverOk()"
+                    class="group relative px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full text-xl shadow-[0_0_20px_rgba(34,197,94,0.6)] transition-all transform hover:scale-110 active:scale-95">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="rotate-ccw"
+                            class="w-5 h-5 group-hover:-rotate-180 transition-transform duration-500"></i>
+                        yes
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BROKEN HEART MODAL -->
+    <div id="modal-broken-heart"
+        class="fixed inset-0 z-[70] flex flex-col items-center justify-center bg-black/95 text-white p-4 hidden-page">
+        <div class="animate-in fade-in zoom-in duration-500 flex flex-col items-center">
+            <i data-lucide="heart-crack"
+                class="text-red-600 mb-6 animate-pulse w-40 h-40 fill-red-600 filter drop-shadow-[0_0_15px_rgba(220,38,38,0.8)]"></i>
+            <h2 class="text-4xl md:text-6xl font-black text-center mb-4 tracking-wider leading-tight">HYEEEE MAI
+                TOH<br />TUT GAYA 💔</h2>
+            <div class="flex gap-2 mb-8 items-end h-16">
+                <div class="w-3 bg-red-500 animate-[bounce_1s_infinite] h-4 rounded-t"></div>
+                <div class="w-3 bg-red-500 animate-[bounce_1.2s_infinite] h-10 rounded-t"></div>
+                <div class="w-3 bg-red-500 animate-[bounce_0.8s_infinite] h-6 rounded-t"></div>
+                <div class="w-3 bg-red-500 animate-[bounce_1.5s_infinite] h-14 rounded-t"></div>
+                <div class="w-3 bg-red-500 animate-[bounce_1.1s_infinite] h-12 rounded-t"></div>
+                <div class="w-3 bg-red-500 animate-[bounce_0.9s_infinite] h-5 rounded-t"></div>
+            </div>
+            <div id="last-chance-container" class="hidden flex flex-col items-center gap-6 fade-in">
+                <p class="text-2xl font-bold tracking-wide text-valentine-200">Last Chance to Fix This 🥺</p>
+                <div class="flex gap-6 justify-center items-center">
+                    <button onclick="handleMercyReset()"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-10 rounded-full text-lg shadow-xl transition-all transform hover:scale-105 hover:shadow-green-500/50">I'm
+                        Sorry, Yes!</button>
+                    <button id="modal-no-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-gray-300 hover:text-white font-bold py-3 px-8 rounded-full text-lg shadow-xl transition-all duration-150 border-2 border-gray-600 hover:border-red-600">Still
+                        No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 0: PRE-PROPOSAL -->
+    <div id="page-pre-proposal"
+        class="hidden-page flex flex-col items-center justify-center min-h-screen relative z-10 opacity-0 transition-opacity duration-1000">
+        <div class="absolute inset-0 bg-gradient-to-b from-valentine-50 to-white opacity-80 z-0"></div>
+        <h1
+            class="relative z-10 text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-600 font-hand tracking-widest text-center p-6 animate-float leading-relaxed drop-shadow-sm">
+            I HAVE A QUESTION<br>FOR YOU...
+        </h1>
+    </div>
+
+    <!-- PAGE 1: PROPOSAL -->
+    <div id="page-proposal"
+        class="hidden-page flex flex-col items-center justify-center h-screen p-4 text-center overflow-hidden relative z-10">
+        <div class="absolute top-10 left-10 text-valentine-300 animate-float opacity-50"><i data-lucide="sparkles"
+                class="w-12 h-12"></i></div>
+        <div class="absolute bottom-20 right-10 text-valentine-300 animate-float-delayed opacity-50"><i
+                data-lucide="flower-2" class="w-16 h-16"></i></div>
+        <div class="glass-panel p-8 rounded-3xl shadow-2xl max-w-lg w-full transform transition-all hover:scale-[1.01]">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Cute Bear"
+                class="w-48 h-48 mx-auto mb-6 object-cover rounded-2xl shadow-lg" />
+            <h1 class="text-4xl md:text-5xl font-bold text-valentine-600 mb-8 font-hand">Will you be mine? 🥺</h1>
+
+            <div class="mt-4 flex flex-row items-center justify-center gap-6 relative">
+                <button onclick="handleYesClick()" id="yes-btn"
+                    class="bg-gradient-to-r from-valentine-500 to-pink-600 hover:from-valentine-600 hover:to-pink-700 text-white font-bold py-4 px-12 rounded-full shadow-lg shadow-valentine-500/40 transition-all duration-300 z-20 text-xl transform hover:-translate-y-1 animate-heartbeat">Yes
+                    💖</button>
+                <button id="no-btn"
+                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-4 px-12 rounded-full shadow-md cursor-pointer z-10 transition-transform duration-150">No</button>
+            </div>
+            <p class="mt-8 text-xs text-gray-400 uppercase tracking-widest font-semibold">Terms and Conditions Apply
+                (You can't say no)</p>
+        </div>
+    </div>
+
+    <!-- PAGE 2: CELEBRATION -->
+    <div id="page-celebration"
+        class="hidden-page flex flex-col items-center justify-center min-h-screen p-4 text-center bg-valentine-50 relative z-10 overflow-hidden">
+        <button onclick="navigateTo('page-proposal')"
+            class="absolute top-6 left-6 z-30 text-gray-400 hover:text-valentine-600 transition-colors p-3 bg-white rounded-full shadow-md hover:shadow-lg group">
+            <i data-lucide="arrow-left" class="w-6 h-6 group-hover:-translate-x-1 transition-transform"></i>
+        </button>
+        <!-- Hearts for this page specifically -->
+        <div id="celebration-hearts-container" class="absolute inset-0 pointer-events-none z-0"></div>
+
+        <div class="relative z-10 max-w-2xl w-full">
+            <div class="mb-8 relative inline-block">
+                <div class="absolute inset-0 bg-yellow-200 rounded-full filter blur-xl opacity-50 animate-pulse"></div>
+                <img src="cute2.gif" alt="Celebration Bear"
+                    class="w-72 h-72 rounded-2xl shadow-2xl object-cover relative z-10 transform hover:scale-105 transition-transform duration-500" />
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-valentine-600 mb-6 font-hand animate-bounce drop-shadow-sm">
+                Hyyeee 🫠💖</h1>
+            <div
+                class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl mb-8 mx-auto max-w-lg border border-white/50">
+                <p class="text-xl md:text-2xl text-gray-700 font-body leading-relaxed">Best. Decision. Ever. <br />You
+                    just made me the happiest person in the universe! 🌍✨</p>
+            </div>
+            <button onclick="handleOpenGifts()"
+                class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-valentine-600 font-lg rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-valentine-600 hover:bg-valentine-700 shadow-lg shadow-valentine-500/50 hover:scale-105">
+                <span class="mr-2 text-2xl"></span>
+                <span class="text-xl">Open 🎁</span>
+                <i data-lucide="arrow-right" class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                <div class="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: DASHBOARD -->
+    <div id="page-dashboard" class="hidden-page min-h-screen bg-gray-50/50 relative z-10 pb-24">
+        <header
+            class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-40 px-6 py-4 flex items-center justify-between">
+            <button onclick="navigateTo('page-celebration')"
+                class="p-2 text-gray-500 hover:text-valentine-600 transition-colors rounded-full hover:bg-gray-100">
+                <i data-lucide="arrow-left" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 font-hand">Our Love Dashboard</h2>
+            <div class="w-10"></div>
+        </header>
+        <div class="max-w-6xl mx-auto p-6 pt-8">
+            <div class="text-center mb-10">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-valentine-100 text-valentine-600 text-xs font-bold tracking-wider uppercase mb-2">For
+                    My Chipkali</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3"></h2>
+                <p class="text-gray-500 max-w-md mx-auto">Explore the little things that matter.</p>
+            </div>
+            <!-- Dashboard Grid (Premium Glass Layout) -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+
+                <!-- QUIZ -->
+                <button onclick="navigateTo('page-quiz')"
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-12 transition">
+                        <i data-lucide="brain-circuit" class="w-8 h-8 text-purple-600"></i>
+                    </div>
+                    <span class="font-bold text-gray-700 text-lg">Quiz</span>
+                </button>
+
+                <!-- GALLERY -->
+                <button onclick="navigateTo('page-gallery')"
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:-rotate-12 transition">
+                        <i data-lucide="image" class="w-8 h-8 text-blue-600"></i>
+                    </div>
+                    <span class="font-bold text-gray-700 text-lg">Memories</span>
+                </button>
+
+                <!-- LETTER -->
+                <button onclick="navigateTo('page-letter')"
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
+                        <i data-lucide="mail" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <span class="font-bold text-gray-700 text-lg">My Letter</span>
+                </button>
+
+                <!-- TIMELINE -->
+                <button onclick="navigateTo('page-timeline')"
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-6 transition">
+                        <i data-lucide="calendar" class="w-8 h-8 text-green-600"></i>
+                    </div>
+                    <span class="font-bold text-gray-700 text-lg">Journey</span>
+                </button>
+
+                <!-- REASONS (LOVE JAR) -->
+                <button onclick="navigateTo('page-reasons')"
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48 col-span-2 md:col-span-1">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:shake transition">
+                        <i data-lucide="heart-handshake" class="w-8 h-8 text-yellow-600"></i>
+                    </div>
+                    <span class="font-bold text-gray-700 text-lg">Love Jar</span>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-16 text-center">
+        <p class="text-gray-400 text-xs flex items-center justify-center gap-1 animate-pulse">Created with <i
+                data-lucide="code-2" class="w-3 h-3"></i> & <i data-lucide="coffee" class="w-3 h-3"></i> for my
+            one & only.</p>
+    </div>
+    </div>
+    <!-- Music Player Removed -->
+
+    <!-- PAGE 4: QUIZ -->
+    <div id="page-quiz"
+        class="hidden-page fixed inset-0 flex flex-col items-center justify-center p-4 z-50 overflow-hidden">
+        <button onclick="navigateTo('page-dashboard')"
+            class="absolute top-6 left-6 z-20 text-white hover:text-purple-200 transition-colors p-2 bg-black/20 rounded-full backdrop-blur-sm">
+            <i data-lucide="arrow-left" class="w-6 h-6"></i>
+        </button>
+        <div class="absolute top-0 left-0 w-full h-full bg-purple-50 z-0">
+            <div
+                class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+            </div>
+            <div
+                class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+            </div>
+        </div>
+        <div
+            class="bg-white p-8 md:p-10 rounded-3xl shadow-2xl w-full max-w-lg relative z-10 border-4 border-purple-100">
+            <div
+                class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 mx-auto text-purple-600">
+                <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+            </div>
+            <div id="quiz-content" class="min-h-[300px] flex flex-col justify-center"></div>
+            <div id="quiz-result" class="hidden text-center py-4">
+                <div
+                    class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500 animate-bounce">
+                    <i data-lucide="trophy" class="w-12 h-12 fill-current"></i>
+                </div>
+                <h3 class="text-4xl font-bold text-gray-800 mb-2">Perfect Score!</h3>
+                <p class="text-gray-500 mb-8 text-lg">You know me better than I know myself! ❤️</p>
+                <button onclick="navigateTo('page-dashboard')"
+                    class="w-full bg-purple-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-purple-700 transition transform hover:-translate-y-1">Claim
+                    Your Prize (Go Back)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 5: MEMORIES (ROMANTIC FLOATING POLAROIDS) -->
+    <div id="page-gallery" class="hidden-page fixed inset-0 overflow-hidden z-50">
+
+        <!-- Romantic Gradient Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#2d0a1f] via-[#4a1942] via-[#7b2d5f] to-[#c85a8e]"></div>
+
+        <!-- Animated Bokeh Particles Canvas -->
+        <canvas id="romantic-bokeh" class="absolute inset-0 z-0 pointer-events-none opacity-40"></canvas>
+
+        <!-- Floating Hearts -->
+        <div id="floating-hearts-gallery" class="absolute inset-0 z-5 pointer-events-none"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 h-full flex flex-col">
+
+            <!-- Romantic Header -->
+            <header
+                class="flex-shrink-0 px-4 py-4 flex items-center justify-between border-b border-white/10 bg-black/10 backdrop-blur-xl">
+                <button onclick="navigateTo('page-dashboard')"
+                    class="group flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-rose-400/50 hover:bg-white/10 transition-all duration-500">
+                    <i data-lucide="arrow-left"
+                        class="w-4 h-4 text-white/60 group-hover:text-rose-300 group-hover:-translate-x-1 transition-all"></i>
+                    <span class="text-white/60 group-hover:text-white text-sm font-medium">Back</span>
+                </button>
+
+                <div class="text-center">
+                    <span
+                        class="text-xs uppercase tracking-[0.3em] text-rose-300/80 font-bold block mb-1 drop-shadow-[0_0_8px_rgba(244,114,182,0.6)]">Our
+                        Love Story</span>
+                    <h1
+                        class="text-4xl md:text-5xl font-hand font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-pink-100 to-rose-200 drop-shadow-[0_2px_10px_rgba(255,182,193,0.4)]">
+                        Precious Memories
+                    </h1>
+                    <p class="text-rose-200/60 text-xs mt-1 font-light tracking-wide">Every moment with you is a
+                        treasure</p>
+                </div>
+
+                <div class="w-28"></div>
+            </header>
+
+            <!-- Scrollable Polaroid Area -->
+            <div class="flex-1 overflow-y-auto overflow-x-hidden px-4 md:px-8 py-8" id="gallery-scroll-area">
+                <div class="max-w-7xl mx-auto relative min-h-full">
+                    <!-- Polaroids Container - Scattered Layout -->
+                    <div class="relative w-full h-full" id="polaroid-container" style="min-height: 800px;">
+                        <!-- Photos Injected by JS as floating polaroids -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Romantic Lightbox -->
+        <div id="lightbox-modal"
+            class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl hidden opacity-0 transition-opacity duration-700 flex items-center justify-center p-4"
+            onclick="closeLightbox()">
+
+            <div class="relative max-w-5xl w-full" onclick="event.stopPropagation()">
+                <!-- Close Button -->
+                <button onclick="closeLightbox()"
+                    class="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-8 h-8"></i>
+                </button>
+
+                <!-- Polaroid Frame in Lightbox -->
+                <div class="bg-[#fdfbf7] p-4 md:p-6 shadow-2xl transform transition-all duration-700">
+                    <div class="relative">
+                        <img id="lightbox-img" src=""
+                            class="w-full max-h-[70vh] object-contain shadow-inner transform scale-95 transition-all duration-700">
+                    </div>
+
+                    <!-- Caption Area (Love Note Style) -->
+                    <div class="mt-4 md:mt-6 px-2">
+                        <div id="lightbox-caption-wrap"
+                            class="transform translate-y-8 opacity-0 transition-all duration-500">
+                            <p id="lightbox-caption"
+                                class="text-2xl md:text-3xl font-hand text-center text-[#3d2817] leading-relaxed">
+                            </p>
+                            <div class="flex items-center justify-center gap-2 mt-3">
+                                <div class="h-px w-12 bg-rose-400/30"></div>
+                                <i data-lucide="heart" class="w-4 h-4 text-rose-400 fill-rose-400"></i>
+                                <div class="h-px w-12 bg-rose-400/30"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 6: LETTER (PREMIUM RED THEME) -->
+    <div id="page-letter"
+        class="hidden-page fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#4a0404] to-[#2b0202] z-50 overflow-hidden">
+
+        <button onclick="navigateTo('page-dashboard')"
+            class="absolute top-6 left-6 text-gray-400 hover:text-red-400 z-30 transition-colors hover:scale-110 duration-300">
+            <i data-lucide="arrow-left" class="w-8 h-8"></i>
+        </button>
+
+        <p class="absolute top-24 text-red-200/80 font-hand text-2xl z-20 animate-pulse">
+            Tap the seal to open...
+        </p>
+
+        <!-- Overlay to close letter when clicked outside -->
+        <div id="letter-overlay-bg" onclick="handleCloseLetter()"></div>
+
+        <canvas id="letter-canvas" class="absolute inset-0 pointer-events-none z-10"></canvas>
+
+        <!-- Main Envelope (Premium Look) -->
+        <div class="envelope-wrapper relative z-40" id="main-envelope" onclick="toggleLetter()">
+            <div class="envelope-body">
+                <!-- Texture overlay -->
+                <div
+                    class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/dark-leather.png')]">
+                </div>
+            </div>
+
+            <div class="letter-content" id="letter-content-el">
+                <!-- Close Button -->
+                <div class="letter-close-btn" onclick="event.stopPropagation(); handleCloseLetter()">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </div>
+
+                <!-- Image Container for the sliding letter -->
+                <img id="letter-image" src="001.png" class="w-full h-full object-cover rounded-sm bg-white"
+                    alt="Letter">
+            </div>
+
+            <div class="envelope-pocket pocket-left"></div>
+            <div class="envelope-pocket pocket-right"></div>
+            <div class="envelope-pocket pocket-triangle"></div>
+
+            <div class="envelope-flap">
+                <div class="flap-triangle"></div>
+                <div class="wax-seal">
+                    <i data-lucide="heart" class="w-6 h-6 fill-valentine-200"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- PAGE 7: TIMELINE (HORIZONTAL PARALLAX) -->
+    <div id="page-timeline" class="hidden-page fixed inset-0 bg-valentine-50 p-0 z-50 overflow-hidden">
+
+        <!-- Floating Hearts Background (Interactive) -->
+        <canvas id="journey-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+        <!-- Header -->
+        <div class="fixed top-0 left-0 w-full z-40 p-6 flex items-center justify-between pointer-events-none">
+            <button onclick="navigateTo('page-dashboard')"
+                class="p-3 bg-white/80 backdrop-blur-md rounded-full text-gray-600 hover:text-pink-600 shadow-lg pointer-events-auto transition hover:scale-110">
+                <i data-lucide="arrow-left" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-3xl font-bold text-gray-800 font-hand drop-shadow-sm">The Journey</h2>
+            <div class="w-12"></div> <!-- Spacer -->
+        </div>
+
+        <!-- Timeline Connecting Line (fixed across viewport) -->
+        <div
+            class="fixed top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-300 to-transparent z-10 pointer-events-none">
+        </div>
+
+        <!-- Horizontal Scroll Container -->
+        <div id="timeline-scroll-area"
+            class="w-full h-screen overflow-x-scroll overflow-y-hidden whitespace-nowrap scroll-smooth snap-x snap-mandatory flex items-center px-[50vw]">
+            <div id="timeline-container" class="flex gap-24 py-10 items-center relative z-20">
+                <!-- Items injected here -->
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div
+            class="fixed bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 animate-bounce text-sm font-medium z-40">
+            Swipe to explore <i data-lucide="arrow-right" class="inline w-4 h-4 ml-1"></i>
+        </div>
+    </div>
+
+    <!-- PAGE 8: REASONS (LOVE JAR) -->
+    <div id="page-reasons"
+        class="hidden-page fixed inset-0 bg-amber-50 flex flex-col items-center justify-center p-6 z-50 overflow-hidden">
+
+        <button onclick="navigateTo('page-dashboard')"
+            class="absolute top-6 left-6 text-gray-400 hover:text-amber-600 z-30 transition hover:scale-110">
+            <i data-lucide="arrow-left" class="w-8 h-8"></i>
+        </button>
+
+        <h2 class="absolute top-10 font-hand text-3xl text-amber-800 animate-pulse">Tap the Jar...</h2>
+
+        <!-- The Jar Container -->
+        <div class="relative w-64 h-80 cursor-pointer group" onclick="popReason()">
+            <!-- Jar SVG / visual -->
+            <div
+                class="absolute inset-0 bg-white/30 backdrop-blur-sm border-4 border-white/50 rounded-[3rem] shadow-xl z-20 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">
+                <div class="absolute top-0 w-full h-4 bg-white/40"></div>
+                <!-- Glass Reflection -->
+                <div class="absolute top-4 left-4 w-4 h-60 bg-white/20 rounded-full blur-sm"></div>
+                <!-- Label -->
+                <div
+                    class="bg-amber-100/80 px-6 py-4 rounded-xl transform -rotate-2 border border-amber-200 shadow-sm text-center">
+                    <span class="font-hand text-xl text-amber-800 font-bold">Reasons<br>Why I Love<br>You</span>
+                </div>
+                <!-- Loose paper bits inside -->
+                <div class="absolute bottom-4 right-8 w-8 h-8 bg-pink-200 rounded-sm transform rotate-12 opacity-60">
+                </div>
+                <div class="absolute bottom-6 left-10 w-8 h-8 bg-blue-200 rounded-sm transform -rotate-6 opacity-60">
+                </div>
+                <div
+                    class="absolute bottom-10 right-16 w-8 h-8 bg-yellow-200 rounded-sm transform rotate-45 opacity-60">
+                </div>
+            </div>
+
+            <!-- Lid -->
+            <div
+                class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-48 h-12 bg-amber-200 rounded-lg shadow-md z-20 border-b-4 border-amber-300">
+            </div>
+        </div>
+
+        <!-- Flying Note Container (Hidden by default, appears on click) -->
+        <div id="flying-note-container"
+            class="fixed inset-0 pointer-events-none z-50 flex items-center justify-center hidden">
+            <!-- The Note -->
+            <div id="flying-note"
+                class="bg-yellow-100 w-72 h-72 md:w-96 md:h-96 shadow-2xl p-8 transform scale-0 transition-transform duration-500 flex flex-col items-center justify-center text-center rotate-6 font-hand relative">
+                <!-- Tape -->
+                <div
+                    class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-white/40 rotate-1 shadow-sm">
+                </div>
+
+                <i data-lucide="heart" class="w-12 h-12 text-red-400 mb-6 animate-bounce"></i>
+                <h3 class="text-3xl text-gray-800 leading-normal" id="jar-reason-text">...</h3>
+                <p class="mt-8 text-sm text-gray-500 font-sans uppercase tracking-widest">Reason #<span
+                        id="jar-reason-num">0</span></p>
+
+                <button
+                    class="mt-8 px-6 py-2 bg-white rounded-full text-sm font-bold shadow-md hover:bg-gray-50 pointer-events-auto transition"
+                    onclick="closeNote()">
+                    Fold Back
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* --- Data Store --- */
+        const DB = {
+            quiz: [
+                { q: "Who is the better cook? 🍳", options: ["Me (Obviously)", "You", "We order out mostly"], correct: 0 },
+                { q: "What is my favorite thing about you? 🥰", options: ["Your Smile", "Your Eyes", "Everything"], correct: 2 },
+                { q: "Where should our next date be? 🌹", options: ["Picnic", "Movie Night", "Fancy Dinner"], correct: 0 },
+                { q: "Who said 'I love you' first?", options: ["Me", "You", "It was mutual"], correct: 0 },
+            ],
+            timeline: [
+                { date: "Day 1", title: "The Beginning", desc: "The day our worlds collided and everything changed." },
+                { date: "Week 1", title: "First Date", desc: "Awkward glances, nervous laughter, and a perfect ending." },
+                { date: "Month 1", title: "Making Memories", desc: "First trip, inside jokes, and realizing this is real." },
+                { date: "Today", title: "Forever & Always", desc: "Asking you to be my Valentine, today and every day." }
+            ],
+            reasons: [
+                "Your smile lights up the room.",
+                "We can talk about anything.",
+                "You love me for who I am.",
+                "You are also my friend.",
+                "The way you laugh at my bad jokes.",
+                "Your kindness towards others.",
+                "The way you look at me.",
+                "You challenge me to be better.",
+                "Your impeccable taste in music.",
+                "You are the most beautiful person I know."
+            ],
+            gallery: [
+                { src: "002.jpeg", caption: "😎" },
+                { src: "003.jpeg", caption: "😎" },
+                { src: "004.jpeg", caption: "🫡" },
+                { src: "005.jpeg", caption: "💕" },
+                { src: "006.jpeg", caption: "😎" },
+                { src: "007.jpeg", caption: "💖" },
+                { src: "008.jpeg", caption: "😘" },
+                { src: "009.jpeg", caption: "💕" },
+                { src: "010.jpeg", caption: "🥰" },
+                { src: "011.jpeg", caption: "😎" },
+                { src: "012.jpeg", caption: "😶‍🌫️" },
+                { src: "013.jpeg", caption: "😎" },
+                { src: "014.jpeg", caption: "💖" },
+                { src: "015.jpeg", caption: "💕" },
+                { src: "016.jpeg", caption: "😎" },
+                { src: "017.jpeg", caption: "❤️" },
+                { src: "018.jpeg", caption: "❤️" },
+                { src: "019.jpeg", caption: "😎" },
+                { src: "020.jpeg", caption: "❤️" }
+            ]
+        };
+
+        /* --- State Management --- */
+        const State = {
+            noCount: 0,
+            yesScale: 1,
+            chaseStartTime: null,
+            isMercyMode: false,
+            currentQuizIndex: 0,
+            currentReasonIndex: 0,
+            currentSongId: 'song1',
+            isMusicPlaying: false,
+            celebrationInterval: null,
+            letterHeartInterval: null,
+            hasShownChipkali: false,
+            firstLetterSequenceDone: false
+        };
+
+
+
+        /* --- Initialization --- */
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initAudio();
+            initNoButton();
+            renderQuiz();
+            renderTimeline();
+            renderGallery();
+            initCosmicBackground();
+            initTiltEffect();
+            initStaggeredAnimations();
+            startLoadingSequence();
+
+            // Unified Floating Hearts System
+            // 1. Global (Proposal Page) - Keep static float for main bg
+            createFloatingHearts('floating-hearts-container', ['rgba(244, 63, 94, 0.5)', 'rgba(236, 72, 153, 0.5)', 'rgba(225, 29, 72, 0.5)']);
+
+            // 2. Letter Page - NEW Interactive Hearts (Red Theme)
+            initInteractiveHearts('letter-canvas', 'rgba(244, 63, 94,');
+
+            // 3. Journey Page - NEW Interactive Hearts (Pink Theme)
+            initInteractiveHearts('journey-canvas', 'rgba(236, 72, 153,');
+
+            // 4. Love Jar (Amber) - Keep existing static
+            createFloatingHearts('floating-hearts-reasons', ['rgba(251, 191, 36, 0.5)', 'rgba(245, 158, 11, 0.6)', 'rgba(252, 211, 77, 0.5)']);
+            document.body.addEventListener('click', startMusicSystem, { once: true });
+            document.body.addEventListener('touchstart', startMusicSystem, { once: true });
+        });
+
+        function initStaggeredAnimations() {
+            const polaroids = document.querySelectorAll('.polaroid');
+            polaroids.forEach((el, i) => {
+                el.classList.add('animate-pop-in');
+                el.style.animationDelay = `${i * 150}ms`;
+            });
+        }
+
+        /* --- Premium Feature: Cosmic Background (Global) --- */
+        function initCosmicBackground() {
+            // ... existing cosmic background logic ...
+            // Refactored to use the shared class below if possible, but keeping as is for safety
+            // functionality is duplicated below for specific pages to ensure isolation
+            const canvas = document.getElementById('cosmic-canvas');
+            if (!canvas) return;
+            // ... dynamic implementation ...
+            initInteractiveHearts('cosmic-canvas', 'rgba(244, 63, 94,');
+        }
+
+        /* --- Reusable Interactive Hearts System --- */
+        function initInteractiveHearts(canvasId, colorBase) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+
+            // Configuration
+            const particleCount = 40;
+            const connectionDistance = 100;
+            const mouseDistance = 150;
+
+            let mouse = { x: null, y: null };
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 12 + 8;
+                    this.color = `${colorBase} ${Math.random() * 0.4 + 0.1})`;
+                    this.rotation = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * this.size * 0.05;
+                        const directionY = forceDirectionY * force * this.size * 0.05;
+
+                        this.vx -= directionX;
+                        this.vy -= directionY;
+                    }
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation);
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    let topCurveHeight = this.size * 0.3;
+                    ctx.moveTo(0, topCurveHeight);
+                    ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+                    ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+                    ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+                    ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            function initHelper() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update(); p.draw(); });
+
+                // Connections
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        let dx = particles[a].x - particles[b].x;
+                        let dy = particles[a].y - particles[b].y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < connectionDistance) {
+                            ctx.strokeStyle = `rgba(253, 164, 175, ${1 - distance / connectionDistance})`; // Valentine-300
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            initHelper();
+            animate();
+        }
+
+        /* --- Premium Feature: 3D Tilt Effect --- */
+        function initTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card, .glass-panel, button, .polaroid');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', handleTilt);
+                card.addEventListener('mouseleave', resetTilt);
+            });
+
+            function handleTilt(e) {
+                const el = e.currentTarget;
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            }
+
+            function resetTilt(e) {
+                e.currentTarget.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+            }
+        }
+
+        /* --- Loading Sequence (Premium Cosmic) --- */
+        function startLoadingSequence() {
+            const bar = document.getElementById('loading-bar');
+            const text = document.getElementById('loading-text');
+            const screen = document.getElementById('loading-screen');
+            const cosmicCanvas = document.getElementById('cosmic-canvas');
+
+            // Show cosmic canvas immediately
+            if (cosmicCanvas) cosmicCanvas.classList.remove('hidden-page');
+
+            const loadingMessages = [
+                "Preparing Your Surprise",
+                "Loading Love...",
+                "Adding Extra Hearts ❤️",
+                "Making It Perfect...",
+                "Almost Ready!"
+            ];
+
+            let msgIndex = 0;
+            const msgInterval = setInterval(() => {
+                msgIndex = (msgIndex + 1) % loadingMessages.length;
+                if (text) text.textContent = loadingMessages[msgIndex];
+            }, 700);
+
+            // Animate bar
+            setTimeout(() => { if (bar) bar.style.width = "100%"; }, 100);
+
+            // Finish loading
+            setTimeout(() => {
+                clearInterval(msgInterval);
+                if (screen) {
+                    // pre-proposal should be visible BEFORE screen finishes fading out for smoothness
+                    const prePage = document.getElementById('page-pre-proposal');
+                    prePage.classList.remove('hidden-page');
+                    // Ensure opacity is reset for fade in
+                    prePage.style.opacity = '0';
+                    setTimeout(() => { prePage.style.opacity = '1'; }, 50);
+
+                    screen.style.opacity = '0';
+                    screen.style.transition = 'opacity 1.5s ease-in-out';
+
+                    setTimeout(() => {
+                        screen.classList.add('hidden-page');
+                        showPreProposal();
+                    }, 1500);
+                }
+            }, 3500);
+        }
+
+        function showPreProposal() {
+            // Auto-navigate after 3 seconds
+            setTimeout(() => {
+                if (currentPage === 'page-pre-proposal') {
+                    navigateTo('page-proposal');
+                }
+            }, 3000);
+        }
+
+        /* --- Audio System --- */
+        function initAudio() {
+            const volumes = { song1: 0.8, song2: 0.9, song3: 0.7, song4: 0.8, song5: 0.9, song6: 1.0 };
+            Object.keys(volumes).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.volume = volumes[id];
+            });
+
+            // Boost Song 6 (150% Louder Strategy)
+            // Since HTML Audio max is 1.0, we use Web Audio API GainNode
+            try {
+                if (!window.audioCtx) window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const song6 = document.getElementById('song6');
+                if (song6) {
+                    const source = window.audioCtx.createMediaElementSource(song6);
+                    const gainNode = window.audioCtx.createGain();
+                    gainNode.gain.value = 2.5; // Boosting significantly (250% of original source)
+                    source.connect(gainNode);
+                    gainNode.connect(window.audioCtx.destination);
+                }
+            } catch (e) {
+                console.log("Audio boost failed:", e);
+            }
+
+            document.getElementById('song1').play().then(() => {
+                State.isMusicPlaying = true;
+            }).catch(() => console.log("Autoplay blocked"));
+        }
+
+        function startMusicSystem() {
+            // Resume Web Audio context if suspended (browser policy)
+            if (window.audioCtx && window.audioCtx.state === 'suspended') {
+                window.audioCtx.resume();
+            }
+
+            const audio = document.getElementById(State.currentSongId);
+            if (audio.paused) playSpecificSong(State.currentSongId);
+        }
+
+        function playSpecificSong(songId) {
+            // Resume context whenever we switch songs just in case
+            if (window.audioCtx && window.audioCtx.state === 'suspended') {
+                window.audioCtx.resume();
+            }
+
+            ['song1', 'song2', 'song3', 'song4', 'song5', 'song6'].forEach(id => {
+                const audio = document.getElementById(id);
+                if (id === songId) {
+                    audio.play().catch(e => console.log("Interaction needed"));
+                    State.isMusicPlaying = true;
+                } else {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
+            State.currentSongId = songId;
+        }
+
+        function toggleMusicState() {
+            const audio = document.getElementById(State.currentSongId);
+            const icon = document.getElementById('music-toggle-icon');
+            const btn = icon.parentElement;
+            if (audio.paused) {
+                audio.play();
+                State.isMusicPlaying = true;
+                btn.innerHTML = '<i id="music-toggle-icon" data-lucide="pause" class="w-5 h-5"></i>';
+            } else {
+                audio.pause();
+                State.isMusicPlaying = false;
+                btn.innerHTML = '<i id="music-toggle-icon" data-lucide="play" class="w-5 h-5"></i>';
+            }
+            lucide.createIcons();
+            updateMusicWidget();
+        }
+
+        function updateMusicWidget() {
+            const titles = {
+                song1: "Romantic Proposal 🎻",
+                song2: "Heartbreak Anthem 💔",
+                song3: "Celebration Tune 🎉",
+                song4: "Chill Vibes ☕",
+                song5: "My Heart's Voice 💌"
+            };
+            document.getElementById('music-title').innerText = titles[State.currentSongId];
+            document.getElementById('music-status').innerText = State.isMusicPlaying ? "Playing..." : "Paused";
+            const bars = document.querySelectorAll('.music-bar');
+            bars.forEach(bar => { bar.style.animationPlayState = State.isMusicPlaying ? 'running' : 'paused'; });
+        }
+
+        /* --- Navigation & Transitions --- */
+        let currentPage = "page-pre-proposal"; // Start state logic
+
+        function navigateTo(pageId) {
+            if (pageId !== 'page-celebration') stopCelebrationHearts();
+            if (pageId === 'page-proposal') playSpecificSong('song1');
+            if (pageId === 'page-celebration') {
+                playSpecificSong('song3');
+                startCelebrationHearts();
+            }
+            if (pageId === 'page-dashboard') { playSpecificSong('song4'); }
+            if (pageId === 'page-letter') { playSpecificSong('song5'); } // Start Romantic Song on Entry
+
+            // Note: We don't play song5 immediately on page-letter anymore, 
+            // we wait for the envelope click logic.
+
+            // Use Heart Transition ONLY for Proposal -> Celebration
+            if (pageId === 'page-celebration') {
+                const overlay = document.getElementById('iris-overlay');
+                if (overlay) {
+                    overlay.classList.remove('hidden-page');
+
+                    requestAnimationFrame(() => {
+                        overlay.classList.add('expanding');
+                    });
+
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                        const allPages = document.querySelectorAll('[id^="page-"]');
+                        allPages.forEach(page => page.classList.add('hidden-page'));
+                        const target = document.getElementById(pageId);
+                        if (target) {
+                            target.classList.remove('hidden-page');
+                            lucide.createIcons();
+                        }
+
+                        // Fade out
+                        overlay.classList.add('fading');
+
+                        setTimeout(() => {
+                            overlay.classList.remove('expanding', 'fading');
+                            overlay.classList.add('hidden-page');
+                        }, 500);
+                    }, 800);
+                } else {
+                    // Fallback if overlay missing
+                    window.scrollTo(0, 0);
+                    const allPages = document.querySelectorAll('[id^="page-"]');
+                    allPages.forEach(page => page.classList.add('hidden-page'));
+                    const target = document.getElementById(pageId);
+                    if (target) {
+                        target.classList.remove('hidden-page');
+                        lucide.createIcons();
+                    }
+                }
+
+            } else {
+                // Formal Fade for everything else
+                const overlay = document.getElementById('fade-overlay');
+                if (overlay) {
+                    overlay.classList.add('active');
+
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                        const allPages = document.querySelectorAll('[id^="page-"]');
+                        allPages.forEach(page => page.classList.add('hidden-page'));
+                        const target = document.getElementById(pageId);
+                        if (target) {
+                            target.classList.remove('hidden-page');
+                            lucide.createIcons();
+                        }
+
+                        // Fade out
+                        overlay.classList.remove('active');
+                    }, 400);
+                } else {
+                    // Fallback
+                    window.scrollTo(0, 0);
+                    const allPages = document.querySelectorAll('[id^="page-"]');
+                    allPages.forEach(page => page.classList.add('hidden-page'));
+                    const target = document.getElementById(pageId);
+                    if (target) {
+                        target.classList.remove('hidden-page');
+                        lucide.createIcons();
+                    }
+                }
+            }
+            currentPage = pageId;
+        }
+
+        /* --- Proposal Logic (TRULY SLIPPERY BUTTON) --- */
+        function initNoButton() {
+            const btn = document.getElementById('no-btn');
+            const modalBtn = document.getElementById('modal-no-btn');
+
+            if (btn) {
+                // Store initial position
+                btn.dataset.offsetX = '0';
+                btn.dataset.offsetY = '0';
+
+                // Track mouse movement across entire page
+                document.addEventListener('mousemove', (e) => {
+                    if (State.isMercyMode) return;
+                    if (currentPage !== 'page-proposal') return;
+
+                    // Don't track if broken heart modal is visible
+                    const brokenHeartModal = document.getElementById('modal-broken-heart');
+                    if (brokenHeartModal && !brokenHeartModal.classList.contains('hidden-page')) return;
+
+                    const rect = btn.getBoundingClientRect();
+                    const btnCenterX = rect.left + rect.width / 2;
+                    const btnCenterY = rect.top + rect.height / 2;
+
+                    const dx = e.clientX - btnCenterX;
+                    const dy = e.clientY - btnCenterY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // If mouse is within 150px, ESCAPE!
+                    if (distance < 150) {
+                        slipAwayFrom(btn, dx, dy, distance);
+                    }
+                });
+
+                // Touch handling
+                btn.addEventListener('touchstart', (e) => {
+                    if (State.isMercyMode) return;
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const rect = btn.getBoundingClientRect();
+                    const dx = touch.clientX - (rect.left + rect.width / 2);
+                    const dy = touch.clientY - (rect.top + rect.height / 2);
+                    slipAwayFrom(btn, dx, dy, 50);
+                });
+            }
+
+            if (modalBtn) {
+                modalBtn.addEventListener('click', () => {
+                    document.getElementById('modal-broken-heart').classList.add('hidden-page');
+                    const gameOver = document.getElementById('page-game-over');
+                    gameOver.classList.remove('hidden-page');
+                    setTimeout(() => { document.getElementById('game-over-btn-container').classList.remove('hidden'); }, 2000);
+                });
+            }
+        }
+
+        function slipAwayFrom(btn, dx, dy, distance) {
+            if (!State.chaseStartTime) State.chaseStartTime = Date.now();
+
+            // After 3 seconds of chasing, trigger broken heart
+            if (Date.now() - State.chaseStartTime > 3000) {
+                triggerBrokenHeart();
+                return;
+            }
+
+            // Calculate escape - run AWAY from mouse
+            const escapePower = Math.max(0.5, (150 - distance) / 50);
+            const escapeX = -(dx / distance) * 80 * escapePower;
+            const escapeY = -(dy / distance) * 80 * escapePower;
+
+            // Get current offset
+            let currentX = parseFloat(btn.dataset.offsetX) || 0;
+            let currentY = parseFloat(btn.dataset.offsetY) || 0;
+
+            // Add escape vector
+            let newX = currentX + escapeX;
+            let newY = currentY + escapeY;
+
+            // Clamp to stay reasonably on screen
+            const maxOffset = 200;
+            newX = Math.max(-maxOffset, Math.min(maxOffset, newX));
+            newY = Math.max(-maxOffset, Math.min(maxOffset, newY));
+
+            // Store new position
+            btn.dataset.offsetX = newX;
+            btn.dataset.offsetY = newY;
+
+            // Apply with wobble effect
+            const wobble = Math.sin(Date.now() / 80) * 8;
+            btn.style.transform = `translate(${newX}px, ${newY}px) rotate(${wobble}deg)`;
+            btn.style.transition = 'transform 0.1s ease-out';
+        }
+
+        function moveButton() {
+            // Legacy - now handled by mouse proximity
+            if (State.isMercyMode) return;
+        }
+
+        function handleYesClick() { navigateTo('page-celebration'); }
+
+        function triggerBrokenHeart() {
+            const modal = document.getElementById('modal-broken-heart');
+            const lastChance = document.getElementById('last-chance-container');
+            modal.classList.remove('hidden-page');
+            playSpecificSong('song2');
+            lastChance.classList.add('hidden');
+            setTimeout(() => { lastChance.classList.remove('hidden'); }, 2000);
+        }
+
+        function handleMercyReset() {
+            document.getElementById('modal-broken-heart').classList.add('hidden-page');
+            document.getElementById('page-game-over').classList.add('hidden-page');
+            navigateTo('page-proposal');
+            State.isMercyMode = true;
+            State.chaseStartTime = null;
+            const noBtn = document.getElementById('no-btn');
+            if (noBtn) noBtn.style.display = 'none';
+            const yesBtn = document.getElementById('yes-btn');
+            yesBtn.classList.add('scale-125');
+            yesBtn.innerText = "YES 💖";
+        }
+
+        function handleGameOverOk() { handleMercyReset(); }
+        function handleOpenGifts() { navigateTo('page-dashboard'); }
+
+        /* --- Feature: Quiz --- */
+        function renderQuiz() {
+            const container = document.getElementById('quiz-content');
+            if (State.currentQuizIndex >= DB.quiz.length) {
+                container.classList.add('hidden');
+                document.getElementById('quiz-result').classList.remove('hidden');
+                return;
+            }
+            const q = DB.quiz[State.currentQuizIndex];
+            let html = `
+                <div class="mb-6 fade-in">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold tracking-wider text-purple-400 uppercase">Question ${State.currentQuizIndex + 1}/${DB.quiz.length}</span>
+                        <div class="flex gap-1">${DB.quiz.map((_, i) => `<div class="w-2 h-2 rounded-full ${i <= State.currentQuizIndex ? 'bg-purple-500' : 'bg-gray-200'}"></div>`).join('')}</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mt-2 leading-tight">${q.q}</h3>
+                </div>
+                <div class="space-y-3 fade-in">
+            `;
+            q.options.forEach((opt, idx) => {
+                html += `<button onclick="handleQuizAnswer(${idx})" class="w-full text-left p-4 rounded-xl border-2 border-gray-100 hover:border-purple-300 hover:bg-purple-50 transition-all font-medium text-gray-600 active:scale-95">${opt}</button>`;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function handleQuizAnswer(idx) { State.currentQuizIndex++; renderQuiz(); }
+
+        /* --- Feature: Timeline --- */
+        /* --- Feature: Timeline (Horizontal) --- */
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            const colors = ['bg-red-50', 'bg-pink-50', 'bg-purple-50', 'bg-orange-50'];
+
+            container.innerHTML = DB.timeline.map((item, index) => {
+                const rotation = (Math.random() * 6) - 3; // Random rotate -3 to 3 deg
+                const color = colors[index % colors.length];
+
+                return `
+                <div class="snap-center shrink-0 w-[300px] md:w-[400px] h-[400px] ${color} rounded-3xl p-8 shadow-xl border border-white/50 flex flex-col justify-center relative transform transition-all duration-500 hover:scale-105 hover:rotate-0 tilt-card" style="transform: rotate(${rotation}deg)">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg text-2xl border-2 border-pink-200">
+                        ${index + 1}
+                    </div>
+                    <div class="tilt-card-content">
+                        <span class="inline-block px-3 py-1 bg-white/80 rounded-full text-xs font-bold text-pink-500 mb-4 shadow-sm">${item.date}</span>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-3 font-hand leading-tight">${item.title}</h3>
+                        <p class="text-gray-600 leading-relaxed">${item.desc}</p>
+                        ${item.image ? `<img src="${item.image}" class="mt-4 rounded-lg shadow-sm h-32 w-full object-cover">` : ''}
+                    </div>
+                    <div class="absolute bottom-6 right-6">
+                        <i data-lucide="heart" class="w-6 h-6 text-pink-300"></i>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            // Re-init tilt for new elements
+            initTiltEffect();
+        }
+
+        /* --- Feature: Romantic Floating Polaroid Memories --- */
+        function renderGallery() {
+            const container = document.getElementById('polaroid-container');
+            if (!container) return;
+
+            // Initialize romantic bokeh particles
+            initRomanticBokeh();
+
+            // Scattered positions (as percentages for responsive)
+            const positions = [
+                { top: '5%', left: '10%' }, { top: '15%', left: '70%' },
+                { top: '25%', left: '30%' }, { top: '35%', left: '85%' },
+                { top: '45%', left: '15%' }, { top: '55%', left: '60%' },
+                { top: '65%', left: '40%' }, { top: '75%', left: '80%' },
+                { top: '85%', left: '20%' }, { top: '8%', left: '50%' },
+                { top: '20%', left: '5%' }, { top: '40%', left: '75%' },
+                { top: '60%', left: '25%' }, { top: '80%', left: '55%' },
+                { top: '30%', left: '90%' }, { top: '50%', left: '10%' },
+                { top: '70%', left: '65%' }, { top: '90%', left: '35%' },
+                { top: '12%', left: '45%' }
+            ];
+
+            container.innerHTML = DB.gallery.map((item, index) => {
+                const delay = index * 150;
+                const rotation = (Math.random() - 0.5) * 12; // -6 to 6 degrees
+                const pos = positions[index % positions.length];
+
+                // Random tape type (washi tape patterns)
+                const tapes = ['bg-pink-200/40', 'bg-rose-200/40', 'bg-amber-100/40'];
+                const tape = tapes[index % tapes.length];
+
+                return `
+                <div class="polaroid-memory absolute w-64 md:w-72 cursor-pointer transform-gpu"
+                     style="top: ${pos.top}; left: ${pos.left}; --rotate: ${rotation}deg; --delay: ${delay}ms; z-index: ${index};"
+                     onclick="openLightbox('${item.src}', '${item.caption}')">
+                    
+                    <!-- Polaroid Frame -->
+                    <div class="bg-[#fdfbf7] p-3 md:p-4 shadow-2xl rounded-sm transform transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+                        
+                        <!-- Washi Tape at Top -->
+                        <div class="${tape} h-6 w-20 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1 opacity-70 rounded-sm shadow-sm"></div>
+                        
+                        <!-- Photo Area -->
+                        <div class="relative aspect-square overflow-hidden bg-gray-100 mb-3">
+                            <img src="${item.src}" 
+                                 class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-500"
+                                 loading="lazy">
+                        </div>
+                        
+                        <!-- Handwritten Caption -->
+                        <p class="font-hand text-[#3d2817] text-center text-lg md:text-xl leading-relaxed px-2">
+                            ${item.caption}
+                        </p>
+                        
+                        <!-- Small Heart Stamp -->
+                        <div class="absolute bottom-2 right-2 opacity-30 hover:opacity-60 transition-opacity">
+                            <span class="text-red-400 text-sm">♥</span>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        /* --- Romantic Bokeh Particle System --- */
+        function initRomanticBokeh() {
+            const canvas = document.getElementById('romantic-bokeh');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+
+            // Create bokeh circles
+            for (let i = 0; i < 30; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 80 + 40,
+                    opacity: Math.random() * 0.15 + 0.05,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2,
+                    color: ['rgba(255, 182, 193, ', 'rgba(255, 160, 200, ', 'rgba(255, 200, 220, '][Math.floor(Math.random() * 3)]
+                });
+            }
+
+
+            function animate() {
+                if (currentPage !== 'page-gallery') return;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Bounce off edges
+                    if (p.x < -p.radius || p.x > canvas.width + p.radius) p.vx *= -1;
+                    if (p.y < -p.radius || p.y > canvas.height + p.radius) p.vy *= -1;
+
+                    // Draw soft bokeh circle
+                    const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                    gradient.addColorStop(0, p.color + (p.opacity * 0.8) + ')');
+                    gradient.addColorStop(0.5, p.color + (p.opacity * 0.4) + ')');
+                    gradient.addColorStop(1, p.color + '0)');
+
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        /* --- Floating Hearts Background System (Unified Proposal Style) --- */
+        function createFloatingHearts(containerId, heartColors) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // Clear existing if any
+            container.innerHTML = '';
+
+            const heartSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+
+            // Create 20 hearts
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'bg-heart';
+                heart.innerHTML = heartSVG;
+
+                // Random properties
+                const left = Math.random() * 100;
+                const size = Math.random() * 25 + 10; // 10-35px
+                const duration = Math.random() * 10 + 10; // 10-20s (slower, floating)
+                const delay = Math.random() * 10;
+                const color = heartColors[Math.floor(Math.random() * heartColors.length)];
+
+                heart.style.left = `${left}%`;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.color = color;
+
+                // Ensure opacity is handle by class or color (rgba)
+                // bg-heart CSS has hardcoded color/opacity, we override color here
+
+                container.appendChild(heart);
+            }
+        }
+
+        function initGalleryParticles() {
+            const canvas = document.getElementById('gallery-particles');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    size: Math.random() * 2 + 0.5,
+                    opacity: Math.random() * 0.5 + 0.1
+                });
+            }
+
+            function animate() {
+                if (currentPage !== 'page-gallery') return;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 150, 200, ${p.opacity})`;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        function openLightbox(src, caption) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const cap = document.getElementById('lightbox-caption');
+            const capWrap = document.getElementById('lightbox-caption-wrap');
+
+            img.src = src;
+            cap.innerText = caption;
+
+            modal.classList.remove('hidden');
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+
+            setTimeout(() => {
+                img.classList.remove('scale-95');
+                img.classList.add('scale-100');
+                if (capWrap) {
+                    capWrap.classList.remove('translate-y-8', 'opacity-0');
+                }
+            }, 100);
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const capWrap = document.getElementById('lightbox-caption-wrap');
+
+            modal.classList.add('opacity-0');
+            img.classList.remove('scale-100');
+            img.classList.add('scale-95');
+            if (capWrap) {
+                capWrap.classList.add('translate-y-8', 'opacity-0');
+            }
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 700);
+        }
+
+
+
+        /* --- Feature: Reasons (Love Jar) --- */
+        function popReason() {
+            const container = document.getElementById('flying-note-container');
+            const note = document.getElementById('flying-note');
+            const text = document.getElementById('jar-reason-text');
+            const num = document.getElementById('jar-reason-num');
+
+            // Pick random reason
+            const rIndex = Math.floor(Math.random() * DB.reasons.length);
+            text.innerText = DB.reasons[rIndex];
+            num.innerText = rIndex + 1;
+
+            // Show container
+            container.classList.remove('hidden');
+
+            // Animate Note Pop
+            // Reset state
+            note.style.transform = 'scale(0) rotate(0deg)';
+
+            setTimeout(() => {
+                const randomRotate = (Math.random() * 10) - 5;
+                note.style.transform = `scale(1) rotate(${randomRotate}deg)`;
+            }, 50);
+
+            // Play Sound? (if we had a pop sound)
+        }
+
+        function closeNote() {
+            const container = document.getElementById('flying-note-container');
+            const note = document.getElementById('flying-note');
+
+            note.style.transform = 'scale(0) rotate(0deg)';
+
+            setTimeout(() => {
+                container.classList.add('hidden');
+            }, 300);
+        }
+
+        /* --- Feature: Letter (NEW LOGIC) --- */
+        function toggleLetter() {
+            const envelope = document.getElementById('main-envelope');
+            const letterImg = document.getElementById('letter-image');
+            const letterContent = document.getElementById('letter-content-el');
+            const overlay = document.getElementById('letter-overlay-bg');
+            const song6 = document.getElementById('song6');
+
+            // prevent reopening if already open
+            if (letterContent.classList.contains('popped')) return;
+
+            /* ---------- STEP 1 : PRANK IMAGE ---------- */
+
+            letterImg.src = '001.png';
+
+            envelope.classList.add('open');
+
+            setTimeout(() => {
+                letterContent.classList.add('popped');
+            }, 300);
+
+            playSpecificSong('song6');
+
+            /* ---------- STEP 2 : WHEN SONG 6 ENDS ---------- */
+
+            if (song6) {
+                song6.onended = function () {
+
+                    const seal = document.querySelector('.wax-seal');
+                    seal.classList.add('seal-crack');
+
+                    setTimeout(() => {
+                        seal.classList.remove('seal-crack');
+                    }, 500);
+
+                    letterContent.classList.add('letter-slide-down');
+
+
+                    // close prank letter
+                    letterContent.classList.remove('popped');
+
+                    setTimeout(() => {
+                        envelope.classList.remove('open');
+
+                        // reopen automatically with real letter
+                        setTimeout(() => {
+
+                            letterImg.src = 'myletter.png';
+                            envelope.classList.add('open');
+
+                            setTimeout(() => {
+                                letterContent.classList.add('popped');
+                                overlay.classList.add('active');
+                            }, 300);
+
+                            playSpecificSong('song5');
+                            startLetterHearts();
+
+
+                        }, 700);
+
+                    }, 500);
+
+                    // reset handler so it works again next time
+                    song6.onended = null;
+                };
+            }
+        }
+
+
+
+
+        // Close Letter Logic (Manual)
+        function handleCloseLetter() {
+            stopLetterHearts();
+
+            const envelope = document.getElementById('main-envelope');
+            const letterContent = document.getElementById('letter-content-el');
+            const overlay = document.getElementById('letter-overlay-bg');
+
+            if (!letterContent.classList.contains('popped')) return;
+
+            letterContent.classList.remove('popped');
+            overlay.classList.remove('active');
+
+            setTimeout(() => {
+                envelope.classList.remove('open');
+            }, 600);
+        }
+
+
+
+        function closeLetterViewer() {
+            // Legacy function cleanup
+        }
+
+
+        /* --- Visuals: Transparent Floating Hearts (Boing Effect) --- */
+        function generateFloatingHearts() {
+            const container = document.getElementById('floating-hearts-container');
+            // SVG heart path
+            const heartSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+
+            for (let i = 0; i < 20; i++) {
+                const div = document.createElement('div');
+                div.classList.add('bg-heart');
+                div.innerHTML = heartSVG;
+                div.style.left = Math.random() * 100 + '%';
+                // Random size
+                const size = Math.random() * 30 + 10;
+                div.style.width = size + 'px';
+                div.style.height = size + 'px';
+                // Random delay so they don't all start at once
+                div.style.animationDelay = Math.random() * 5 + 's';
+                // Random duration for different speeds
+                div.style.animationDuration = (Math.random() * 5 + 10) + 's';
+                container.appendChild(div);
+            }
+        }
+
+        /* --- Visuals: Celebration Hearts (Only for Celebration Page) --- */
+        function startCelebrationHearts() {
+            const container = document.getElementById('celebration-hearts-container');
+            const heartSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+
+            if (State.celebrationInterval) clearInterval(State.celebrationInterval);
+
+            State.celebrationInterval = setInterval(() => {
+                const div = document.createElement('div');
+                div.classList.add('bg-heart'); // Reuse base class for float logic
+                div.innerHTML = heartSVG;
+                div.style.left = Math.random() * 100 + '%';
+                div.style.bottom = '-50px'; // Force start at bottom
+                div.style.color = '#e11d48'; // Stronger color for celebration
+                div.style.opacity = '0.6';
+                div.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Faster for celebration
+
+                container.appendChild(div);
+
+                // Cleanup
+                setTimeout(() => { div.remove(); }, 7000);
+            }, 300);
+        }
+
+        function stopCelebrationHearts() {
+            if (State.celebrationInterval) clearInterval(State.celebrationInterval);
+            const container = document.getElementById('celebration-hearts-container');
+            if (container) container.innerHTML = '';
+        }
+
+        /* =========================
+           LETTER HEARTS (ADD HERE)
+           ========================= */
+
+        function startLetterHearts() {
+            if (State.letterHeartInterval)
+                clearInterval(State.letterHeartInterval);
+
+            const container = document.getElementById('letter-hearts-container');
+
+            const heartSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         fill="currentColor">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+        2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+        C13.09 3.81 14.76 3 16.5 3
+        19.58 3 22 5.42 22 8.5
+        c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>`;
+
+            State.letterHeartInterval = setInterval(() => {
+
+                const div = document.createElement('div');
+                div.classList.add('bg-heart');
+
+                div.innerHTML = heartSVG;
+                div.style.left = Math.random() * 100 + '%';
+                div.style.color = '#f43f5e';
+                div.style.opacity = '0.5';
+                div.style.animationDuration = (Math.random() * 4 + 6) + 's';
+
+                container.appendChild(div);
+
+                setTimeout(() => div.remove(), 8000);
+
+            }, 350);
+        }
+
+        function stopLetterHearts() {
+            clearInterval(State.letterHeartInterval);
+            const container = document.getElementById('letter-hearts-container');
+            if (container) container.innerHTML = '';
+        }
+
+    </script>
+</body>
+
+</html>
