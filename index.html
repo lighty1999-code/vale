@@ -509,7 +509,7 @@
         .timeline-item:hover .timeline-dot {
             transform: scale(1.5);
             background-color: #e11d48;
-            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.3);
+            box-shadow: 0 0 0 4px rgba(29, 42, 225, 0.3);
         }
 
         /* Polaroid */
@@ -1139,12 +1139,22 @@
 
                 <!-- REASONS (LOVE JAR) -->
                 <button onclick="navigateTo('page-reasons')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48 col-span-2 md:col-span-1">
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
                         class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:shake transition">
                         <i data-lucide="heart-handshake" class="w-8 h-8 text-yellow-600"></i>
                     </div>
                     <span class="font-bold text-gray-700 text-lg">Love Jar</span>
+                </button>
+
+                <!-- MAGIC -->
+                <button onclick="navigateTo('page-heart-portrait')"
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-rose-100 to-pink-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
+                        <i data-lucide="sparkles" class="w-8 h-8 text-rose-600"></i>
+                    </div>
+                    <span class="font-bold text-gray-700 text-lg">Magic</span>
                 </button>
 
             </div>
@@ -1226,10 +1236,8 @@
                         Love Story</span>
                     <h1
                         class="text-4xl md:text-5xl font-hand font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-pink-100 to-rose-200 drop-shadow-[0_2px_10px_rgba(255,182,193,0.4)]">
-                        Precious Memories
-                    </h1>
-                    <p class="text-rose-200/60 text-xs mt-1 font-light tracking-wide">Every moment with you is a
-                        treasure</p>
+                        Every moment with you is a treasure
+
                 </div>
 
                 <div class="w-28"></div>
@@ -1438,6 +1446,64 @@
         </div>
     </div>
 
+    <!-- PAGE 9: HEART PORTRAIT ANIMATION -->
+    <div id="page-heart-portrait" class="hidden-page fixed inset-0 z-50 overflow-hidden">
+        <!-- Cinematic Dark Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#1a050f] via-[#2d0a1f] to-[#1a050f]"></div>
+
+        <!-- Ambient floating orbs -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-rose-500/5 rounded-full blur-3xl animate-pulse"
+                style="animation-duration:8s"></div>
+            <div class="absolute bottom-1/3 -right-20 w-80 h-80 bg-pink-500/5 rounded-full blur-3xl animate-pulse"
+                style="animation-duration:12s"></div>
+            <div class="absolute top-2/3 left-1/3 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl animate-pulse"
+                style="animation-duration:10s"></div>
+        </div>
+
+        <!-- Premium Glass Header (Matching Gallery) -->
+        <header
+            class="absolute top-0 left-0 w-full z-40 flex-shrink-0 px-4 py-4 flex items-center justify-between border-b border-white/5 bg-black/10 backdrop-blur-md">
+            <!-- Back Button -->
+            <button onclick="stopHeartPortrait(); navigateTo('page-dashboard')"
+                class="group flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-rose-400/50 hover:bg-white/10 transition-all duration-500 hover:shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+                <i data-lucide="arrow-left"
+                    class="w-4 h-4 text-white/70 group-hover:text-rose-300 group-hover:-translate-x-1 transition-all"></i>
+                <span class="text-white/70 group-hover:text-white text-sm font-medium">Back</span>
+            </button>
+
+            <!-- Title -->
+            <div class="text-center absolute left-1/2 transform -translate-x-1/2">
+                <span
+                    class="text-[10px] uppercase tracking-[0.3em] text-rose-300/80 font-bold block mb-1 drop-shadow-[0_0_8px_rgba(244,114,182,0.6)]">
+                    Made With Love
+                </span>
+                <h2
+                    class="text-2xl font-hand font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-pink-100 to-rose-200 drop-shadow-[0_2px_10px_rgba(255,182,193,0.4)]">
+                    Magic Moment
+                </h2>
+            </div>
+
+            <!-- Spacer for alignment -->
+            <div class="w-20"></div>
+        </header>
+
+        <!-- Main Canvas -->
+        <canvas id="heart-portrait-canvas" class="absolute inset-0 w-full h-full z-10"></canvas>
+
+        <!-- Replay Button (Premium Glass) -->
+        <button id="heart-portrait-replay" onclick="initHeartPortrait()"
+            class="hidden absolute bottom-12 left-1/2 transform -translate-x-1/2 z-40 group px-6 py-3 bg-white/10 backdrop-blur-xl text-white/90 rounded-full border border-white/20 hover:bg-white/20 hover:border-rose-400/50 hover:text-white font-medium transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+            <span class="flex items-center gap-2">
+                <i data-lucide="refresh-cw"
+                    class="w-4 h-4 group-hover:rotate-180 transition-transform duration-700"></i>
+                Replay Magic ✨
+            </span>
+        </button>
+
+        <!-- Hidden Image for Pixel Sampling -->
+        <img id="portrait-source" src="016.jpeg" class="hidden" />
+    </div>
 
 
     <!-- JAVASCRIPT LOGIC -->
@@ -1861,6 +1927,7 @@
             }
             if (pageId === 'page-dashboard') { playSpecificSong('song4'); }
             if (pageId === 'page-letter') { playSpecificSong('song5'); } // Start Romantic Song on Entry
+            // Heart portrait init is delayed to after currentPage is set (see below)
 
             // Note: We don't play song5 immediately on page-letter anymore, 
             // we wait for the envelope click logic.
@@ -1937,6 +2004,10 @@
                 }
             }
             currentPage = pageId;
+            // Start heart portrait animation AFTER currentPage is set and after fade transition
+            if (pageId === 'page-heart-portrait') {
+                setTimeout(() => { initHeartPortrait(); }, 500);
+            }
         }
 
         /* --- Proposal Logic (TRULY SLIPPERY BUTTON) --- */
@@ -2610,6 +2681,777 @@
             clearInterval(State.letterHeartInterval);
             const container = document.getElementById('letter-hearts-container');
             if (container) container.innerHTML = '';
+        }
+
+        /* ============================================
+           CINEMATIC HEART PORTRAIT ANIMATION
+           Premium Edition — Full Rewrite
+           ============================================ */
+        let heartPortraitAnimId = null;
+
+        function stopHeartPortrait() {
+            if (heartPortraitAnimId) {
+                cancelAnimationFrame(heartPortraitAnimId);
+                heartPortraitAnimId = null;
+            }
+        }
+
+        function initHeartPortrait() {
+            const canvas = document.getElementById('heart-portrait-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const replayBtn = document.getElementById('heart-portrait-replay');
+            if (replayBtn) replayBtn.classList.add('hidden');
+            stopHeartPortrait();
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const W = canvas.width, H = canvas.height;
+            const CX = W / 2, CY = H / 2;
+            const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+            // ═══════════════════════════════════════
+            //  BLOOM CANVAS (offscreen for glow fx)
+            // ═══════════════════════════════════════
+            const bloomCanvas = document.createElement('canvas');
+            bloomCanvas.width = W; bloomCanvas.height = H;
+            const bctx = bloomCanvas.getContext('2d');
+
+            // ═══════════════════════════════════════
+            //  TIMING — cinematic pacing
+            // ═══════════════════════════════════════
+            const T1 = 4.8;   // Prelude ribbons
+            const T2 = 6.4;   // Heart sculpt
+            const T3 = 3.2;   // Hero pulse
+            const T4 = 5.4;   // Shatter burst
+            const T5 = 8.2;   // Portrait assembly
+            let startTime = Date.now();
+            let phase = 0;
+
+            // ═══════════════════════════════════════
+            //  HEART MATH
+            // ═══════════════════════════════════════
+            const HS = Math.min(W, H) * 0.019;
+            function hx(t, s) { return 16 * Math.pow(Math.sin(t), 3) * s; }
+            function hy(t, s) { return -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * s; }
+
+            // ═══════════════════════════════════════
+            //  EASING
+            // ═══════════════════════════════════════
+            function easeIO3(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+            function easeOut4(t) { return 1 - Math.pow(1 - t, 4); }
+            function easeIO2(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+            function easeIn2(t) { return t * t; }
+            function easeOut5(t) { return 1 - Math.pow(1 - t, 5); }
+            function easeIO5(t) { return t < .5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2; }
+            function easeOutBack(t) {
+                const c1 = 1.70158;
+                const c3 = c1 + 1;
+                return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+            }
+            function smootherStep(t) {
+                const x = clamp01(t);
+                return x * x * x * (x * (x * 6 - 15) + 10);
+            }
+            function lerp(a, b, t) { return a + (b - a) * t; }
+            function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+            function gauss(x, c, w) {
+                const n = (x - c) / w;
+                return Math.exp(-(n * n));
+            }
+
+            // ═══════════════════════════════════════
+            //  AMBIENT SPARKLES (float throughout)
+            // ═══════════════════════════════════════
+            const SPARKLE_COUNT = 140;
+            const sparkles = [];
+            const embers = [];
+            for (let i = 0; i < SPARKLE_COUNT; i++) {
+                sparkles.push({
+                    x: Math.random() * W, y: Math.random() * H,
+                    vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18,
+                    sz: Math.random() * 2 + .25,
+                    op: Math.random() * .35 + .04,
+                    pulse: Math.random() * Math.PI * 2,
+                    ps: Math.random() * .026 + .008,
+                    hue: Math.random() * 60 + 310
+                });
+            }
+            for (let i = 0; i < 44; i++) {
+                embers.push({
+                    a: Math.random() * Math.PI * 2,
+                    r: HS * (8 + Math.random() * 20),
+                    pr: Math.random() * Math.PI * 2,
+                    ps: Math.random() * .03 + .01,
+                    sz: Math.random() * 2.7 + .8,
+                    op: Math.random() * .28 + .05,
+                    hue: 320 + Math.random() * 32
+                });
+            }
+            function renderSparkles(alpha = 1, speed = 1) {
+                sparkles.forEach(s => {
+                    s.x += s.vx * speed; s.y += s.vy * speed; s.pulse += s.ps * speed;
+                    if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
+                    if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
+                    const a = s.op * (0.45 + Math.sin(s.pulse) * 0.55) * alpha;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.sz, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${s.hue},78%,82%,${a})`;
+                    ctx.fill();
+                    // tiny glow
+                    if (s.sz > 1.05) {
+                        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.sz * 4.4);
+                        g.addColorStop(0, `hsla(${s.hue},95%,84%,${a * 0.34})`);
+                        g.addColorStop(1, 'transparent');
+                        ctx.fillStyle = g;
+                        ctx.fillRect(s.x - s.sz * 4.4, s.y - s.sz * 4.4, s.sz * 8.8, s.sz * 8.8);
+                    }
+                });
+            }
+            function renderEmbers(time, intensity = 1) {
+                embers.forEach(e => {
+                    const orbit = e.r * (1 + Math.sin(time * .9 + e.pr) * .08);
+                    const x = CX + Math.cos(e.a + time * .35 + e.pr) * orbit;
+                    const y = CY - 15 + Math.sin(e.a * 1.4 + time * .42 + e.pr) * orbit * .75;
+                    const tw = e.op * (0.55 + Math.sin(e.pr + time * (.8 + e.ps * 30)) * 0.45) * intensity;
+                    ctx.beginPath();
+                    ctx.arc(x, y, e.sz, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${e.hue},96%,78%,${tw})`;
+                    ctx.fill();
+                });
+            }
+
+            // ═══════════════════════════════════════
+            //  FLOWING LINES (120 lines, smoother)
+            // ═══════════════════════════════════════
+            const LINE_CT = 156;
+            const lines = [];
+            for (let i = 0; i < LINE_CT; i++) {
+                const t = (i / LINE_CT) * Math.PI * 2;
+                const a = Math.random() * Math.PI * 2;
+                const d = Math.random() * Math.max(W, H) * .38 + Math.max(W, H) * .62;
+                lines.push({
+                    sx: CX + Math.cos(a) * d, sy: CY + Math.sin(a) * d,
+                    tx: CX + hx(t, HS), ty: CY + hy(t, HS) - 15,
+                    x: CX + Math.cos(a) * d, y: CY + Math.sin(a) * d,
+                    vx: 0, vy: 0,
+                    spd: Math.random() * .3 + .7,
+                    w: Math.random() * 1.8 + .8,
+                    op: Math.random() * .35 + .65,
+                    hue: Math.random() * 42 + 320,
+                    trail: [], tmax: Math.floor(Math.random() * 30 + 20),
+                    ph: Math.random() * Math.PI * 2,
+                    glow: Math.random() * .6 + .4,
+                    roamA: Math.random() * Math.PI * 2,
+                    roamB: Math.random() * Math.PI * 2,
+                    roamR: Math.random() * Math.max(W, H) * .22 + Math.max(W, H) * .1,
+                    roamTwist: Math.random() * .8 + .45,
+                    orbit: Math.random() * HS * 13 + HS * 4,
+                    noise: Math.random()
+                });
+            }
+            // ═══════════════════════════════════════
+            //  PORTRAIT SAMPLING — HIGH RES
+            // ═══════════════════════════════════════
+            let portraitData = []; let portraitReady = false;
+            const img = document.getElementById('portrait-source');
+            const tc = document.createElement('canvas');
+            const tctx = tc.getContext('2d');
+
+            function sampleImg() {
+                if (!img || !img.complete || !img.naturalWidth) { setTimeout(sampleImg, 100); return; }
+                const COLS = 112;
+                const ratio = img.naturalHeight / img.naturalWidth;
+                const ROWS = Math.floor(COLS * ratio);
+                const pW = Math.min(W, H) * 0.66;
+                const pH = pW * ratio;
+                tc.width = COLS; tc.height = ROWS;
+                tctx.drawImage(img, 0, 0, COLS, ROWS);
+                try {
+                    const id = tctx.getImageData(0, 0, COLS, ROWS);
+                    const d = id.data;
+                    portraitData = [];
+                    const cw = pW / COLS, ch = pH / ROWS;
+                    const ox = CX - pW / 2, oy = CY - pH / 2;
+                    for (let r = 0; r < ROWS; r++) {
+                        for (let c = 0; c < COLS; c++) {
+                            const idx = (r * COLS + c) * 4;
+                            const R = d[idx], G = d[idx + 1], B = d[idx + 2], A = d[idx + 3];
+                            const bri = (R + G + B) / 3;
+                            if (bri < 6 || A < 20) continue;
+                            portraitData.push({
+                                x: ox + c * cw + cw / 2, y: oy + r * ch + ch / 2,
+                                r: R, g: G, b: B,
+                                sz: Math.max(cw, ch) * 0.46
+                            });
+                        }
+                    }
+                    portraitReady = true;
+                } catch (e) { fallbackPortrait(); }
+            }
+            function fallbackPortrait() {
+                const sz = Math.min(W, H) * .4; portraitData = [];
+                for (let i = 0; i < 72; i++)for (let j = 0; j < 72; j++) {
+                    const nx = (i / 72) * 2 - 1, ny = (j / 72) * 2 - 1;
+                    if (Math.pow(nx * nx + ny * ny - 1, 3) - nx * nx * ny * ny * ny <= 0)
+                        portraitData.push({
+                            x: CX + nx * sz * .45, y: CY + ny * sz * .45,
+                            r: 200 + Math.floor(Math.random() * 55), g: 50 + Math.floor(Math.random() * 80),
+                            b: 100 + Math.floor(Math.random() * 55), sz: sz / 72 * .72
+                        });
+                }
+                portraitReady = true;
+            }
+            sampleImg();
+
+            // ═══════════════════════════════════════
+            //  DRAW HEART SHAPE (optimized)
+            // ═══════════════════════════════════════
+            function drawMiniHeart(x, y, s, col, a) {
+                ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y);
+                ctx.fillStyle = col; ctx.beginPath();
+                ctx.moveTo(0, s * .3);
+                ctx.bezierCurveTo(0, 0, -s / 2, 0, -s / 2, s * .3);
+                ctx.bezierCurveTo(-s / 2, s * .65, 0, s * .9, 0, s);
+                ctx.bezierCurveTo(0, s * .9, s / 2, s * .65, s / 2, s * .3);
+                ctx.bezierCurveTo(s / 2, 0, 0, 0, 0, s * .3);
+                ctx.closePath(); ctx.fill(); ctx.restore();
+            }
+            function drawMiniHeartGlow(x, y, s, col, a, blur) {
+                bctx.save(); bctx.globalAlpha = a; bctx.translate(x, y);
+                bctx.shadowColor = col; bctx.shadowBlur = blur;
+                bctx.fillStyle = col; bctx.beginPath();
+                bctx.moveTo(0, s * .3);
+                bctx.bezierCurveTo(0, 0, -s / 2, 0, -s / 2, s * .3);
+                bctx.bezierCurveTo(-s / 2, s * .65, 0, s * .9, 0, s);
+                bctx.bezierCurveTo(0, s * .9, s / 2, s * .65, s / 2, s * .3);
+                bctx.bezierCurveTo(s / 2, 0, 0, 0, 0, s * .3);
+                bctx.closePath(); bctx.fill(); bctx.restore();
+            }
+
+            // ═══════════════════════════════════════
+            //  BACKGROUND RENDERER
+            // ═══════════════════════════════════════
+            function drawBg(time, intensity = 1) {
+                // Clear to transparent so CSS gradient shows through
+                ctx.clearRect(0, 0, W, H);
+
+                // Add subtle premium overlay
+                const driftX = CX + Math.cos(time * .15) * W * .15;
+                const driftY = CY + Math.sin(time * .18) * H * .15;
+                const rg = ctx.createRadialGradient(driftX, driftY, HS * 5, driftX, driftY, Math.max(W, H));
+                rg.addColorStop(0, `rgba(244, 63, 94, ${0.12 * intensity})`); // Valentine-500
+                rg.addColorStop(0.6, `rgba(159, 18, 57, ${0.05 * intensity})`); // Valentine-800
+                rg.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = rg;
+                ctx.fillRect(0, 0, W, H);
+            }
+
+            function traceHeartPath(scale = 1, yShift = -15, step = .01) {
+                ctx.beginPath();
+                for (let tt = 0; tt <= Math.PI * 2; tt += step) {
+                    const x = CX + hx(tt, HS * scale);
+                    const y = CY + yShift + hy(tt, HS * scale);
+                    tt === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+            }
+            // ═══════════════════════════════════════
+            //  PHASE 1 — FLOWING LINES
+            // ═══════════════════════════════════════
+            function phase1(elapsed) {
+                const p = clamp01(elapsed / T1);
+                renderSparkles(0.34 + p * 0.24, 1);
+                renderEmbers(elapsed, 0.36 + p * 0.28);
+                lines.forEach(L => {
+                    const drift = 1 - p * 0.74;
+                    const orbitX = Math.cos(elapsed * (0.58 + L.noise * 0.24) + L.ph) * L.orbit * drift;
+                    const orbitY = Math.sin(elapsed * (0.72 + L.noise * 0.2) + L.ph * 1.17) * L.orbit * 0.78 * drift;
+                    const inward = clamp01((p - .48) / .52);
+                    const tx = lerp(lerp(L.sx, CX + orbitX, p * .9), L.tx, inward * .28);
+                    const ty = lerp(lerp(L.sy, CY + orbitY, p * .9), L.ty, inward * .28);
+
+                    L.vx = (L.vx + (tx - L.x) * .032) * .9;
+                    L.vy = (L.vy + (ty - L.y) * .032) * .9;
+                    L.x += L.vx;
+                    L.y += L.vy;
+
+                    L.trail.push({ x: L.x, y: L.y });
+                    if (L.trail.length > L.tmax) L.trail.shift();
+                    if (L.trail.length > 2) {
+                        for (let j = 1; j < L.trail.length; j++) {
+                            const ta = j / L.trail.length;
+                            ctx.beginPath();
+                            ctx.moveTo(L.trail[j - 1].x, L.trail[j - 1].y);
+                            ctx.lineTo(L.trail[j].x, L.trail[j].y);
+                            ctx.strokeStyle = `hsla(${L.hue},90%,72%,${ta * L.op * (0.22 + p * 0.56)})`;
+                            ctx.lineWidth = L.w * (0.25 + ta * .9);
+                            ctx.lineCap = 'round';
+                            ctx.stroke();
+                        }
+                    }
+                });
+                if (p > .62) {
+                    const ghost = clamp01((p - .62) / .38);
+                    traceHeartPath(1.02, -15, .013);
+                    ctx.strokeStyle = `rgba(255,180,220,${ghost * .2})`;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                }
+            }
+
+            // ═══════════════════════════════════════
+            //  PHASE 2 — HEART FORMATION
+            // ═══════════════════════════════════════
+            function phase2(t) {
+                const p = easeIO3(t);
+                const settle = easeOut4(p);
+                const loose = 1 - settle;
+                renderSparkles(0.46 + p * 0.26, 0.82);
+                renderEmbers(startTime * .001 + t * 3.4, 0.54 + p * .3);
+
+                const coreRad = HS * (21 + settle * 9);
+                const core = ctx.createRadialGradient(CX, CY - 15, HS * 2, CX, CY - 15, coreRad);
+                core.addColorStop(0, `rgba(254, 205, 211, ${0.12 + settle * 0.16})`); // Valentine-200
+                core.addColorStop(.55, `rgba(244, 63, 94, ${0.06 + settle * 0.12})`); // Valentine-500
+                core.addColorStop(1, 'rgba(159, 18, 57, 0)'); // Valentine-800
+                ctx.fillStyle = core;
+                ctx.fillRect(CX - coreRad, CY - 15 - coreRad, coreRad * 2, coreRad * 2);
+
+                lines.forEach(L => {
+                    const swayA = Math.sin(t * 10.5 + L.ph * 1.25) * (7 + L.w * 6) * loose;
+                    const swayB = Math.cos(t * 8.7 + L.ph * .9) * (4 + L.w * 4) * loose;
+                    const tx = L.tx + Math.cos(L.ph) * swayA - Math.sin(L.ph) * swayB;
+                    const ty = L.ty + Math.sin(L.ph) * swayA + Math.cos(L.ph) * swayB;
+
+                    L.vx = (L.vx + (tx - L.x) * (.034 + settle * .04)) * .88;
+                    L.vy = (L.vy + (ty - L.y) * (.034 + settle * .04)) * .88;
+                    L.x += L.vx;
+                    L.y += L.vy;
+                    L.trail.push({ x: L.x, y: L.y });
+                    if (L.trail.length > L.tmax) L.trail.shift();
+                    if (L.trail.length > 2) {
+                        for (let j = 1; j < L.trail.length; j++) {
+                            const ta = j / L.trail.length;
+                            ctx.beginPath();
+                            ctx.moveTo(L.trail[j - 1].x, L.trail[j - 1].y);
+                            ctx.lineTo(L.trail[j].x, L.trail[j].y);
+                            ctx.strokeStyle = `hsla(${L.hue},90%,72%,${ta * L.op * (0.34 + settle * 0.72)})`;
+                            ctx.lineWidth = L.w * (0.26 + ta * 1.1);
+                            ctx.lineCap = 'round';
+                            ctx.stroke();
+                        }
+                    }
+                });
+
+                const shell = clamp01((p - .1) / .9);
+                ctx.save();
+                // Faux 3D depth stack for heart formation
+                const depthLayers = Math.floor(5 + settle * 10);
+                for (let i = depthLayers; i > 0; i--) {
+                    const off = i * .46;
+                    traceHeartPath(1.01, -15 + off, .012);
+                    ctx.fillStyle = `rgba(136, 19, 55, ${0.04 + settle * 0.03})`; // Valentine-900
+                    ctx.fill();
+                }
+                traceHeartPath(1.045, -15, .011);
+                const shellFill = ctx.createRadialGradient(CX, CY - 15, HS * 1.5, CX, CY - 15, HS * 16.5);
+                shellFill.addColorStop(0, `rgba(255, 228, 230, ${0.16 + shell * 0.2})`); // Valentine-100
+                shellFill.addColorStop(.35, `rgba(251, 113, 133, ${0.16 + shell * 0.18})`); // Valentine-400
+                shellFill.addColorStop(.7, `rgba(225, 29, 72, ${0.1 + shell * 0.15})`); // Valentine-600
+                shellFill.addColorStop(1, 'rgba(159, 18, 57, 0)'); // Valentine-800
+                ctx.fillStyle = shellFill;
+                ctx.fill();
+
+                ctx.shadowColor = `rgba(244, 63, 94, ${shell * 0.65})`; // Valentine-500 Glow
+                ctx.shadowBlur = 34 + shell * 26;
+                traceHeartPath(1.0, -15, .0095);
+                ctx.strokeStyle = `rgba(255, 241, 242, ${0.3 + shell * 0.56})`; // Valentine-50
+                ctx.lineWidth = 1.9 + shell * 1.35;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                if (shell > .52) {
+                    const polish = clamp01((shell - .52) / .48);
+                    traceHeartPath(1.0, -15, .01);
+                    ctx.save();
+                    ctx.clip();
+                    const sweepShift = Math.sin(t * Math.PI * 2.3) * HS * 2.3;
+                    const sweep = ctx.createLinearGradient(
+                        CX - HS * 13 + sweepShift,
+                        CY - HS * 16,
+                        CX + HS * 13 + sweepShift,
+                        CY + HS * 11
+                    );
+                    sweep.addColorStop(0, 'rgba(255,255,255,0)');
+                    sweep.addColorStop(.46, `rgba(255,255,255,${polish * 0.28})`);
+                    sweep.addColorStop(.62, `rgba(255, 205, 211, ${polish * 0.2})`); // Valentine-200
+                    sweep.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.fillStyle = sweep;
+                    ctx.fillRect(CX - HS * 20, CY - HS * 20, HS * 40, HS * 40);
+                    ctx.restore();
+                }
+                ctx.restore();
+            }
+
+            // ═══════════════════════════════════════
+            //  PHASE 3 — PULSE (rebuilt from scratch)
+            // ═══════════════════════════════════════
+            function phase3(t) {
+                renderSparkles(0.62, 0.6);
+                renderEmbers(startTime * .001 + t * 4.8, 0.72);
+                lines.forEach(L => {
+                    L.vx = (L.vx + (L.tx - L.x) * .065) * .84;
+                    L.vy = (L.vy + (L.ty - L.y) * .065) * .84;
+                    L.x += L.vx;
+                    L.y += L.vy;
+                    L.trail.push({ x: L.x, y: L.y });
+                    if (L.trail.length > 16) L.trail.shift();
+                    if (L.trail.length > 2) {
+                        for (let j = 1; j < L.trail.length; j++) {
+                            const ta = j / L.trail.length;
+                            ctx.beginPath();
+                            ctx.moveTo(L.trail[j - 1].x, L.trail[j - 1].y);
+                            ctx.lineTo(L.trail[j].x, L.trail[j].y);
+                            ctx.strokeStyle = `hsla(${L.hue},90%,74%,${ta * L.op * .24})`;
+                            ctx.lineWidth = L.w * (.2 + ta * .72);
+                            ctx.lineCap = 'round';
+                            ctx.stroke();
+                        }
+                    }
+                });
+
+                // Exactly two cinematic beats across pulse phase
+                const hit1 = gauss(t, .28, .085);
+                const hit2 = gauss(t, .69, .095) * .95;
+                const tail = gauss(t, .9, .16) * .12;
+                const pulse = clamp01(hit1 + hit2 + tail);
+                const core = clamp01(hit1 * 1.14 + hit2 * 1.02);
+                const scaleX = 1 + core * .068 - tail * .008;
+                const scaleY = 1 + core * .17 - tail * .02;
+
+                for (let layer = 0; layer < 3; layer++) {
+                    const radius = HS * (18 + layer * 5 + pulse * (5 + layer * 2));
+                    const aura = ctx.createRadialGradient(CX, CY - 15, HS * 2, CX, CY - 15, radius);
+                    const alpha = (.14 - layer * .035) * (.48 + pulse);
+                    aura.addColorStop(0, `rgba(253, 164, 175, ${alpha})`); // Valentine-300
+                    aura.addColorStop(.55, `rgba(251, 113, 133, ${alpha * .45})`); // Valentine-400
+                    aura.addColorStop(1, 'rgba(159, 18, 57, 0)'); // Valentine-800
+                    ctx.fillStyle = aura;
+                    ctx.fillRect(CX - radius, CY - 15 - radius, radius * 2, radius * 2);
+                }
+
+                ctx.save();
+                ctx.translate(CX, CY - 15);
+                ctx.scale(scaleX, scaleY);
+                ctx.translate(-CX, -(CY - 15));
+
+                // 3D depth body for pulse
+                const depth = Math.floor(6 + pulse * 11);
+                for (let i = depth; i > 0; i--) {
+                    const off = i * .42;
+                    traceHeartPath(1.0, -15 + off, .011);
+                    ctx.fillStyle = `rgba(136, 19, 55, ${0.04 + pulse * 0.028})`; // Valentine-900
+                    ctx.fill();
+                }
+
+                traceHeartPath(1.0, -15, .0075);
+                const body = ctx.createLinearGradient(CX - HS * 11, CY - HS * 14, CX + HS * 12, CY + HS * 12);
+                body.addColorStop(0, `rgba(255,255,255,${.44 + pulse * .2})`);
+                body.addColorStop(.24, `rgba(254, 205, 211, ${.62 + pulse * .24})`); // Valentine-200
+                body.addColorStop(.56, `rgba(244, 63, 94, ${.6 + pulse * .24})`); // Valentine-500
+                body.addColorStop(1, `rgba(225, 29, 72, ${.62 + pulse * .2})`); // Valentine-600
+                ctx.fillStyle = body;
+                ctx.shadowColor = `rgba(251, 113, 133, ${.56 + pulse * .34})`; // Valentine-400
+                ctx.shadowBlur = 38 + pulse * 44;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                traceHeartPath(1.0, -15, .01);
+                ctx.save();
+                ctx.clip();
+                const sheenShift = Math.sin(t * Math.PI * 4.5) * HS * 2.9;
+                const sheen = ctx.createLinearGradient(
+                    CX - HS * 17 + sheenShift,
+                    CY - HS * 17,
+                    CX + HS * 14 + sheenShift,
+                    CY + HS * 12
+                );
+                sheen.addColorStop(0, 'rgba(255,255,255,0)');
+                sheen.addColorStop(.45, `rgba(255,255,255,${.14 + pulse * .18})`);
+                sheen.addColorStop(.6, `rgba(254, 205, 211, ${.1 + pulse * .12})`); // Valentine-200
+                sheen.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.fillStyle = sheen;
+                ctx.fillRect(CX - HS * 21, CY - HS * 20, HS * 42, HS * 40);
+                ctx.restore();
+
+                traceHeartPath(1.0, -15, .0085);
+                ctx.strokeStyle = `rgba(255, 241, 242, ${.38 + pulse * .46})`; // Valentine-50
+                ctx.lineWidth = 2.2 + pulse * 1.45;
+                ctx.stroke();
+                traceHeartPath(1.035, -15, .01);
+                ctx.strokeStyle = `rgba(253, 164, 175, ${.16 + pulse * .28})`; // Valentine-300
+                ctx.lineWidth = 1.35;
+                ctx.stroke();
+                ctx.restore();
+
+                const ring1 = clamp01((t - .28) / .36);
+                if (t >= .28 && ring1 <= 1) {
+                    const s1 = 1 + ring1 * .3;
+                    ctx.save();
+                    ctx.translate(CX, CY - 15);
+                    ctx.scale(s1, s1);
+                    ctx.translate(-CX, -(CY - 15));
+                    traceHeartPath(1.0, -15, .012);
+                    ctx.strokeStyle = `rgba(254, 205, 211, ${(1 - ring1) * (.2 + hit1 * .24)})`; // Valentine-200
+                    ctx.lineWidth = 2.2;
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                const ring2 = clamp01((t - .69) / .3);
+                if (t >= .69 && ring2 <= 1) {
+                    const s2 = 1 + ring2 * .24;
+                    ctx.save();
+                    ctx.translate(CX, CY - 15);
+                    ctx.scale(s2, s2);
+                    ctx.translate(-CX, -(CY - 15));
+                    traceHeartPath(1.0, -15, .012);
+                    ctx.strokeStyle = `rgba(251, 113, 133, ${(1 - ring2) * (.16 + hit2 * .22)})`; // Valentine-400
+                    ctx.lineWidth = 1.8;
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+            }
+
+            // ═══════════════════════════════════════
+            //  PARTICLES — dynamic count matching portrait
+            // ═══════════════════════════════════════
+            let particles = [];
+
+            function createParticles() {
+                const count = portraitData.length > 0 ? portraitData.length : 4200;
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    let px, py, ok = false;
+                    while (!ok) {
+                        px = (Math.random() - .5) * HS * 2.6;
+                        py = (Math.random() - .5) * HS * 2.6;
+                        const nx = px / (HS * 1.1), ny = -py / (HS * 1.1);
+                        if (Math.pow(nx * nx + ny * ny - 1, 3) - nx * nx * ny * ny * ny <= 0) ok = true;
+                    }
+                    const angle = Math.atan2(py, px);
+                    const speed = Math.random() * 5 + 3;
+                    particles.push({
+                        x: CX + px, y: CY - 15 + py,
+                        ox: CX + px, oy: CY - 15 + py,
+                        vx: Math.cos(angle) * speed + (Math.random() - .5) * 7,
+                        vy: Math.sin(angle) * speed + (Math.random() - .5) * 7 - 1.8,
+                        bx: CX + (Math.random() - .5) * W * 1.75,
+                        by: CY + (Math.random() - .5) * H * 1.75,
+                        jx: Math.random() * 70 + 25,
+                        jy: Math.random() * 70 + 25,
+                        tx: 0, ty: 0,
+                        tr: 255, tg: 100, tb: 160,
+                        sz: Math.random() * 3 + 1.5,
+                        tsz: 3.8,
+                        hue: Math.random() * 60 + 310,
+                        dr: Math.random() * Math.PI * 2,
+                        ds: Math.random() * .015 + .003,
+                        da: Math.random() * 26 + 10,
+                        depth: Math.random(),
+                        delay: Math.random() * .35, // stagger assembly
+                        burstDelay: Math.random() * .24,
+                        burstR: Math.random() * Math.max(W, H) * .38 + Math.max(W, H) * .22
+                    });
+                }
+            }
+
+            function assignTargets() {
+                if (!portraitReady || !portraitData.length) return;
+                particles.forEach((pt, i) => {
+                    const c = portraitData[i % portraitData.length];
+                    pt.tx = c.x; pt.ty = c.y;
+                    pt.tr = Math.min(255, Math.floor(c.r * 1.16 + 12));
+                    pt.tg = Math.min(255, Math.floor(c.g * 1.16 + 12));
+                    pt.tb = Math.min(255, Math.floor(c.b * 1.16 + 12));
+                    pt.tsz = c.sz * .95;
+                });
+            }
+
+            // ═══════════════════════════════════════
+            //  PHASE 4 — DISPERSE
+            // ═══════════════════════════════════════
+            function phase4(t) {
+                const p = easeOut4(t);
+                renderSparkles(0.38 + p * 0.28, 0.9);
+                // Bloom layer
+                bctx.clearRect(0, 0, W, H);
+                particles.forEach(pt => {
+                    const bp = clamp01((t - pt.burstDelay) / (1 - pt.burstDelay));
+                    const ep = smootherStep(bp);
+                    pt.dr += pt.ds * (.7 + (1 - ep) * 1.3);
+                    const jitter = (1 - ep) * (1 - ep);
+                    const spread = jitter * pt.burstR * .012;
+                    pt.x = lerp(pt.ox, pt.bx, ep) + Math.sin(pt.dr * 1.7) * pt.jx * jitter;
+                    pt.y = lerp(pt.oy, pt.by, ep) + Math.cos(pt.dr * 1.3) * pt.jy * jitter;
+                    const dx = Math.sin(pt.dr) * (pt.da * (.26 + ep * .58) + spread);
+                    const dy = Math.cos(pt.dr * .7) * (pt.da * .2 + spread * .75);
+                    const drawX = pt.x + dx, drawY = pt.y + dy;
+                    const al = .43 + ep * .44;
+                    const sz = pt.sz * (1 + (1 - p) * .25);
+                    drawMiniHeart(drawX, drawY, sz, `hsla(${pt.hue},82%,72%,1)`, al);
+                    // Bloom glow on separate canvas
+                    if (ep < .74 && pt.depth > .62) {
+                        drawMiniHeartGlow(drawX, drawY, sz * 1.45, `hsla(${pt.hue},100%,75%,.3)`, (1 - ep) * .7, sz * 5);
+                    }
+                });
+                // Composite bloom
+                ctx.save(); ctx.globalAlpha = .24 * (1 - p);
+                ctx.drawImage(bloomCanvas, 0, 0);
+                ctx.restore();
+            }
+
+            // ═══════════════════════════════════════
+            //  PHASE 5 — PORTRAIT ASSEMBLY
+            // ═══════════════════════════════════════
+            function phase5(t) {
+                const p = easeIO5(t);
+                renderSparkles(.5 + p * .34, .72);
+                bctx.clearRect(0, 0, W, H);
+                particles.forEach((pt, i) => {
+                    const dp = Math.max(0, Math.min(1, (t - pt.delay) / (1 - pt.delay)));
+                    const pp = smootherStep(dp);
+                    const tgtX = pt.tx || CX, tgtY = pt.ty || CY;
+                    const gather = .012 + pp * .13;
+                    pt.x += (tgtX - pt.x) * gather;
+                    pt.y += (tgtY - pt.y) * gather;
+                    const dm = 1 - pp;
+                    pt.dr += pt.ds * dm * .55;
+                    const wob = dm * dm;
+                    const dx = Math.sin(pt.dr) * pt.da * wob * .08;
+                    const dy = Math.cos(pt.dr * .7) * pt.da * wob * .06;
+                    const drawX = pt.x + dx, drawY = pt.y + dy;
+                    const r = Math.floor(lerp(255, pt.tr, pp));
+                    const g = Math.floor(lerp(100, pt.tg, pp));
+                    const b = Math.floor(lerp(160, pt.tb, pp));
+                    const sz = lerp(pt.sz, pt.tsz, pp * pp);
+                    const al = .58 + pp * .4;
+                    drawMiniHeart(drawX, drawY, sz, `rgb(${r},${g},${b})`, al);
+                    // Glow during assembly
+                    if (pp < .52 && pt.depth > .66) {
+                        drawMiniHeartGlow(drawX, drawY, sz * 1.22, `rgba(${r},${g},${b},.2)`, 1 - pp, sz * 3.8);
+                    }
+                });
+                // Composite glow
+                ctx.save(); ctx.globalAlpha = .2 * (1 - p);
+                ctx.drawImage(bloomCanvas, 0, 0);
+                ctx.restore();
+                // Sparkling assembly effect
+                if (p > .3) {
+                    const sp = (p - .3) / .7;
+                    for (let i = 0; i < Math.floor(sp * 5); i++) {
+                        const sx = CX + (Math.random() - .5) * W * .45;
+                        const sy = CY + (Math.random() - .5) * H * .55;
+                        const ssz = Math.random() * 2.5 + .5;
+                        ctx.save();
+                        ctx.globalAlpha = Math.random() * .4 * sp;
+                        ctx.beginPath();
+                        // 4-point star
+                        const arms = 4;
+                        for (let a = 0; a < arms * 2; a++) {
+                            const angle = a / (arms * 2) * Math.PI * 2;
+                            const rad = a % 2 === 0 ? ssz * 3 : ssz * .5;
+                            const px = sx + Math.cos(angle) * rad;
+                            const py = sy + Math.sin(angle) * rad;
+                            a === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                        }
+                        ctx.closePath();
+                        ctx.fillStyle = 'rgba(255,220,240,.8)';
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+            }
+
+            // ═══════════════════════════════════════
+            //  FINAL — breathing portrait with shimmer
+            // ═══════════════════════════════════════
+            function drawFinal() {
+                if (currentPage !== 'page-heart-portrait') return;
+                ctx.clearRect(0, 0, W, H);
+                drawBg(0.25);
+                renderSparkles(0.7);
+                const now = Date.now() * .0006;
+                // Draw all particles at final positions
+                particles.forEach((pt, i) => {
+                    const breath = Math.sin(now + i * .06) * .035 + 1;
+                    const shimmer = 1.06 + Math.sin(now * 2 + i * .15) * .08;
+                    drawMiniHeart(
+                        pt.tx || pt.x, pt.ty || pt.y,
+                        pt.tsz * breath,
+                        `rgb(${Math.min(255, Math.floor(pt.tr * shimmer))},${Math.min(255, Math.floor(pt.tg * shimmer))},${Math.min(255, Math.floor(pt.tb * shimmer))})`,
+                        .94
+                    );
+                });
+                // Premium vignette
+                const vig = ctx.createRadialGradient(CX, CY, Math.min(W, H) * .2, CX, CY, Math.max(W, H) * .72);
+                vig.addColorStop(0, 'transparent');
+                vig.addColorStop(.7, 'rgba(0,0,0,0.15)');
+                vig.addColorStop(1, 'rgba(0,0,0,0.45)');
+                ctx.fillStyle = vig;
+                ctx.fillRect(0, 0, W, H);
+                // Soft ambient light from top
+                const topLight = ctx.createLinearGradient(0, 0, 0, H * .3);
+                topLight.addColorStop(0, `rgba(255,200,230,${Math.sin(now) * .015 + .02})`);
+                topLight.addColorStop(1, 'transparent');
+                ctx.fillStyle = topLight;
+                ctx.fillRect(0, 0, W, H * .3);
+                heartPortraitAnimId = requestAnimationFrame(drawFinal);
+            }
+
+            // ═══════════════════════════════════════
+            //  MAIN LOOP
+            // ═══════════════════════════════════════
+            function animate() {
+                if (currentPage !== 'page-heart-portrait') { stopHeartPortrait(); return; }
+                const elapsed = (Date.now() - startTime) / 1000;
+
+                // Clear for transparency to show gradient
+                ctx.clearRect(0, 0, W, H);
+                drawBg(elapsed, 0.2);
+
+                if (elapsed < T1) {
+                    phase1(elapsed);
+                } else if (elapsed < T1 + T2) {
+                    phase2((elapsed - T1) / T2);
+                } else if (elapsed < T1 + T2 + T3) {
+                    phase3((elapsed - T1 - T2) / T3);
+                } else if (elapsed < T1 + T2 + T3 + T4) {
+                    if (phase < 4) { phase = 4; createParticles(); }
+                    phase4((elapsed - T1 - T2 - T3) / T4);
+                } else if (elapsed < T1 + T2 + T3 + T4 + T5) {
+                    if (phase < 5) { phase = 5; assignTargets(); }
+                    phase5((elapsed - T1 - T2 - T3 - T4) / T5);
+                } else {
+                    if (replayBtn) replayBtn.classList.remove('hidden');
+                    drawFinal();
+                    return;
+                }
+                heartPortraitAnimId = requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                if (currentPage !== 'page-heart-portrait') return;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                bloomCanvas.width = canvas.width;
+                bloomCanvas.height = canvas.height;
+            });
+
+            phase = 0; startTime = Date.now(); particles = [];
+            animate();
         }
 
     </script>
