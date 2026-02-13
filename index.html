@@ -143,7 +143,7 @@
         #modal-broken-heart,
         #page-game-over {
             min-height: 100svh;
-            min-height: -webkit-fill-available;
+            min-height: var(--app-height);
         }
 
         /* Hide all scrollbars */
@@ -785,29 +785,23 @@
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                height: auto !important;
                 min-height: auto !important;
-                padding-bottom: 6rem;
-                padding-top: 2rem;
+                padding-bottom: 2rem;
             }
 
-            .polaroid-memory {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: rotate(var(--rotate)) !important;
-                margin-bottom: 2rem !important;
-                width: 85vw !important;
-                max-width: 300px !important;
+            /* Reduce Floating Hearts on Mobile for Performance */
+            .floating-heart:nth-child(n+8) {
+                display: none;
             }
 
             /* Envelope adjustments */
             .envelope-wrapper {
-                transform: scale(0.8);
+                width: 280px !important;
+                height: 200px !important;
             }
 
             .envelope-wrapper .letter-content.popped {
-                transform: translateY(-120px) scale(1.1) !important;
+                transform: translateY(-120px) scale(1.2) !important;
             }
 
             /* Typography - Larger for readability */
@@ -1163,62 +1157,62 @@
 
                 <!-- QUIZ -->
                 <button onclick="navigateTo('page-quiz')"
-                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
+                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
-                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-12 transition">
-                        <i data-lucide="brain-circuit" class="w-6 h-6 md:w-8 md:h-8 text-purple-600"></i>
+                        class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-12 transition">
+                        <i data-lucide="brain-circuit" class="w-8 h-8 text-purple-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-sm md:text-lg">Quiz</span>
+                    <span class="font-bold text-gray-700 text-lg">Quiz</span>
                 </button>
 
                 <!-- GALLERY -->
                 <button onclick="navigateTo('page-gallery')"
-                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
-                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:-rotate-12 transition">
-                        <i data-lucide="image" class="w-6 h-6 md:w-8 md:h-8 text-blue-600"></i>
+                        class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:-rotate-12 transition">
+                        <i data-lucide="image" class="w-8 h-8 text-blue-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-sm md:text-lg">Memories</span>
+                    <span class="font-bold text-gray-700 text-lg">Memories</span>
                 </button>
 
                 <!-- LETTER -->
                 <button onclick="navigateTo('page-letter')"
-                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
-                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
-                        <i data-lucide="mail" class="w-6 h-6 md:w-8 md:h-8 text-red-600"></i>
+                        class="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
+                        <i data-lucide="mail" class="w-8 h-8 text-red-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-sm md:text-lg">My Letter</span>
+                    <span class="font-bold text-gray-700 text-lg">My Letter</span>
                 </button>
 
                 <!-- TIMELINE -->
                 <button onclick="navigateTo('page-timeline')"
-                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
-                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-6 transition">
-                        <i data-lucide="calendar" class="w-6 h-6 md:w-8 md:h-8 text-green-600"></i>
+                        class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-6 transition">
+                        <i data-lucide="calendar" class="w-8 h-8 text-green-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-sm md:text-lg">Journey</span>
+                    <span class="font-bold text-gray-700 text-lg">Journey</span>
                 </button>
 
                 <!-- REASONS (LOVE JAR) -->
                 <button onclick="navigateTo('page-reasons')"
-                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
-                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:shake transition">
-                        <i data-lucide="heart-handshake" class="w-6 h-6 md:w-8 md:h-8 text-yellow-600"></i>
+                        class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:shake transition">
+                        <i data-lucide="heart-handshake" class="w-8 h-8 text-yellow-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-sm md:text-lg">Love Jar</span>
+                    <span class="font-bold text-gray-700 text-lg">Love Jar</span>
                 </button>
 
                 <!-- MAGIC -->
                 <button onclick="navigateTo('page-heart-portrait')"
-                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
                     <div
-                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-rose-100 to-pink-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
-                        <i data-lucide="sparkles" class="w-6 h-6 md:w-8 md:h-8 text-rose-600"></i>
+                        class="w-16 h-16 bg-gradient-to-br from-rose-100 to-pink-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
+                        <i data-lucide="sparkles" class="w-8 h-8 text-rose-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-sm md:text-lg">Magic</span>
+                    <span class="font-bold text-gray-700 text-lg">Magic</span>
                 </button>
 
             </div>
@@ -1310,9 +1304,8 @@
             <!-- Scrollable Polaroid Area -->
             <div class="flex-1 overflow-y-auto overflow-x-hidden px-4 md:px-8 py-8" id="gallery-scroll-area">
                 <div class="max-w-7xl mx-auto relative min-h-full">
-                    <!-- Polaroids Container - Scattered Layout on Desktop, Grid/List on Mobile -->
-                    <div class="relative w-full h-full mobile-gallery-layout" id="polaroid-container"
-                        style="min-height: 800px;">
+                    <!-- Polaroids Container - Scattered Layout -->
+                    <div class="relative w-full h-full" id="polaroid-container" style="min-height: 800px;">
                         <!-- Photos Injected by JS as floating polaroids -->
                     </div>
                 </div>
@@ -1557,8 +1550,8 @@
         <canvas id="heart-portrait-canvas" class="absolute inset-0 w-full h-full z-10"></canvas>
 
         <!-- Replay Button (Premium Glass) -->
-        <button id="heart-portrait-replay" onclick="initHeartPortrait()"
-            class="hidden absolute bottom-12 left-1/2 transform -translate-x-1/2 z-40 group px-6 py-3 bg-white/10 backdrop-blur-xl text-white/90 rounded-full border border-white/20 hover:bg-white/20 hover:border-rose-400/50 hover:text-white font-medium transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+        <button id="heart-portrait-replay" onclick="event.stopPropagation(); initHeartPortrait()"
+            class="hidden absolute bottom-12 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer pointer-events-auto group px-6 py-3 bg-white/10 backdrop-blur-xl text-white/90 rounded-full border border-white/20 hover:bg-white/20 hover:border-rose-400/50 hover:text-white font-medium transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
             <span class="flex items-center gap-2">
                 <i data-lucide="refresh-cw"
                     class="w-4 h-4 group-hover:rotate-180 transition-transform duration-700"></i>
@@ -1699,8 +1692,7 @@
             let particles = [];
 
             // Configuration
-            const isMobile = window.innerWidth < 768;
-            const particleCount = isMobile ? 20 : 40;
+            const particleCount = 40;
             const connectionDistance = 100;
             const mouseDistance = 150;
 
@@ -2114,13 +2106,6 @@
                     }
                 });
 
-                // CLICK = INSTANT FAIL 
-                btn.onclick = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    triggerBrokenHeart();
-                };
-
                 // Touch handling
                 btn.addEventListener('touchstart', (e) => {
                     if (State.isMercyMode) return;
@@ -2146,16 +2131,16 @@
         function slipAwayFrom(btn, dx, dy, distance) {
             if (!State.chaseStartTime) State.chaseStartTime = Date.now();
 
-            // After 1 second of chasing, trigger broken heart (User Request: 1s)
-            if (Date.now() - State.chaseStartTime > 1000) {
+            // After 3 seconds of chasing, trigger broken heart
+            if (Date.now() - State.chaseStartTime > 3000) {
                 triggerBrokenHeart();
                 return;
             }
 
             // Calculate escape - run AWAY from mouse
-            const escapePower = Math.max(0.6, (150 - distance) / 40);
-            const escapeX = -(dx / distance) * 100 * escapePower;
-            const escapeY = -(dy / distance) * 100 * escapePower;
+            const escapePower = Math.max(0.5, (150 - distance) / 50);
+            const escapeX = -(dx / distance) * 80 * escapePower;
+            const escapeY = -(dy / distance) * 80 * escapePower;
 
             // Get current offset
             let currentX = parseFloat(btn.dataset.offsetX) || 0;
@@ -2165,20 +2150,19 @@
             let newX = currentX + escapeX;
             let newY = currentY + escapeY;
 
-            // Clamp to stay reasonably on screen (Dynamic to viewport)
-            const maxX = window.innerWidth / 2 - 60;
-            const maxY = window.innerHeight / 2 - 40;
-            newX = Math.max(-maxX, Math.min(maxX, newX));
-            newY = Math.max(-maxY, Math.min(maxY, newY));
+            // Clamp to stay reasonably on screen
+            const maxOffset = 200;
+            newX = Math.max(-maxOffset, Math.min(maxOffset, newX));
+            newY = Math.max(-maxOffset, Math.min(maxOffset, newY));
 
             // Store new position
             btn.dataset.offsetX = newX;
             btn.dataset.offsetY = newY;
 
             // Apply with wobble effect
-            const wobble = Math.sin(Date.now() / 60) * 10;
+            const wobble = Math.sin(Date.now() / 80) * 8;
             btn.style.transform = `translate(${newX}px, ${newY}px) rotate(${wobble}deg)`;
-            btn.style.transition = 'transform 0.08s ease-out';
+            btn.style.transition = 'transform 0.1s ease-out';
         }
 
         function moveButton() {
@@ -2305,35 +2289,35 @@
                 const tape = tapes[index % tapes.length];
 
                 return `
-                <div class="polaroid-memory absolute md:absolute w-64 md:w-72 cursor-pointer transform-gpu mb-8 md:mb-0 mx-auto md:mx-0 relative-on-mobile"
+                <div class="polaroid-memory absolute w-64 md:w-72 cursor-pointer transform-gpu"
                      style="top: ${pos.top}; left: ${pos.left}; --rotate: ${rotation}deg; --delay: ${delay}ms; z-index: ${index};"
-                onclick = "openLightbox('${item.src}', '${item.caption}')" >
-
+                     onclick="openLightbox('${item.src}', '${item.caption}')">
+                    
                     <!-- Polaroid Frame -->
                     <div class="bg-[#fdfbf7] p-3 md:p-4 shadow-2xl rounded-sm transform transition-all duration-500 hover:scale-110 hover:-translate-y-2">
-
+                        
                         <!-- Washi Tape at Top -->
                         <div class="${tape} h-6 w-20 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1 opacity-70 rounded-sm shadow-sm"></div>
-
+                        
                         <!-- Photo Area -->
                         <div class="relative aspect-square overflow-hidden bg-gray-100 mb-3">
-                            <img src="${item.src}"
-                                class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-500"
-                                loading="lazy">
+                            <img src="${item.src}" 
+                                 class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-500"
+                                 loading="lazy">
                         </div>
-
+                        
                         <!-- Handwritten Caption -->
                         <p class="font-hand text-[#3d2817] text-center text-lg md:text-xl leading-relaxed px-2">
                             ${item.caption}
                         </p>
-
+                        
                         <!-- Small Heart Stamp -->
                         <div class="absolute bottom-2 right-2 opacity-30 hover:opacity-60 transition-opacity">
                             <span class="text-red-400 text-sm">♥</span>
                         </div>
                     </div>
-                </div >
-                    `;
+                </div>
+                `;
             }).join('');
 
             lucide.createIcons();
@@ -2406,7 +2390,7 @@
             // Clear existing if any
             container.innerHTML = '';
 
-            const heartSVG = `< svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "currentColor" stroke = "none" > <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg > `;
+            const heartSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 
             // Create 20 hearts
             for (let i = 0; i < 20; i++) {
@@ -2421,11 +2405,11 @@
                 const delay = Math.random() * 10;
                 const color = heartColors[Math.floor(Math.random() * heartColors.length)];
 
-                heart.style.left = `${left}% `;
-                heart.style.width = `${size} px`;
-                heart.style.height = `${size} px`;
-                heart.style.animationDuration = `${duration} s`;
-                heart.style.animationDelay = `${delay} s`;
+                heart.style.left = `${left}%`;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
                 heart.style.color = color;
 
                 // Ensure opacity is handle by class or color (rgba)
@@ -2668,7 +2652,7 @@
         function generateFloatingHearts() {
             const container = document.getElementById('floating-hearts-container');
             // SVG heart path
-            const heartSVG = `< svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "currentColor" stroke = "none" > <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg > `;
+            const heartSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 
             for (let i = 0; i < 20; i++) {
                 const div = document.createElement('div');
@@ -2690,7 +2674,7 @@
         /* --- Visuals: Celebration Hearts (Only for Celebration Page) --- */
         function startCelebrationHearts() {
             const container = document.getElementById('celebration-hearts-container');
-            const heartSVG = `< svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "currentColor" stroke = "none" > <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg > `;
+            const heartSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 
             if (State.celebrationInterval) clearInterval(State.celebrationInterval);
 
@@ -2728,15 +2712,15 @@
             const container = document.getElementById('letter-hearts-container');
 
             const heartSVG = `
-                    < svg xmlns = "http://www.w3.org/2000/svg"
-                viewBox = "0 0 24 24"
-                fill = "currentColor" >
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         fill="currentColor">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
         2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
         C13.09 3.81 14.76 3 16.5 3
         19.58 3 22 5.42 22 8.5
         c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-    </svg > `;
+    </svg>`;
 
             State.letterHeartInterval = setInterval(() => {
 
@@ -2772,12 +2756,6 @@
             if (heartPortraitAnimId) {
                 cancelAnimationFrame(heartPortraitAnimId);
                 heartPortraitAnimId = null;
-            }
-            // Clear canvas
-            const canvas = document.getElementById('heart-portrait-canvas');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
         }
 
@@ -2881,12 +2859,12 @@
                     const a = s.op * (0.45 + Math.sin(s.pulse) * 0.55) * alpha;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.sz, 0, Math.PI * 2);
-                    ctx.fillStyle = `hsla(${s.hue}, 78 %, 82 %, ${a})`;
+                    ctx.fillStyle = `hsla(${s.hue},78%,82%,${a})`;
                     ctx.fill();
                     // tiny glow
                     if (s.sz > 1.05) {
                         const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.sz * 4.4);
-                        g.addColorStop(0, `hsla(${s.hue}, 95 %, 84 %, ${a * 0.34})`);
+                        g.addColorStop(0, `hsla(${s.hue},95%,84%,${a * 0.34})`);
                         g.addColorStop(1, 'transparent');
                         ctx.fillStyle = g;
                         ctx.fillRect(s.x - s.sz * 4.4, s.y - s.sz * 4.4, s.sz * 8.8, s.sz * 8.8);
@@ -2901,7 +2879,7 @@
                     const tw = e.op * (0.55 + Math.sin(e.pr + time * (.8 + e.ps * 30)) * 0.45) * intensity;
                     ctx.beginPath();
                     ctx.arc(x, y, e.sz, 0, Math.PI * 2);
-                    ctx.fillStyle = `hsla(${e.hue}, 96 %, 78 %, ${tw})`;
+                    ctx.fillStyle = `hsla(${e.hue},96%,78%,${tw})`;
                     ctx.fill();
                 });
             }
@@ -2954,8 +2932,7 @@
 
                 // Optimize Resolution for Performance
                 // User Request: More pixels, remove white pixels (transparent)
-                const isMobile = window.innerWidth < 768;
-                const maxParticles = isMobile ? 3000 : 9000;
+                const maxParticles = 9000;
                 const ratio = img.naturalHeight / img.naturalWidth;
 
                 // Calculate COLS based on target count
@@ -3104,7 +3081,7 @@
                         // Gradient stroke? Too expensive. 
                         // Use alpha taper
                         const alpha = L.op * (0.3 + p * 0.6);
-                        ctx.strokeStyle = `hsla(${L.hue + Math.sin(elapsed) * 10}, 90 %, 65 %, ${alpha})`;
+                        ctx.strokeStyle = `hsla(${L.hue + Math.sin(elapsed) * 10}, 90%, 65%, ${alpha})`;
                         ctx.lineWidth = L.w * (0.6 + p * 0.4);
                         ctx.lineCap = 'round';
                         ctx.stroke();
@@ -3169,7 +3146,7 @@
                         // Electric glow intensity
                         const intensity = 0.5 + p * 1.5;
                         const sat = 80 + p * 20;
-                        ctx.strokeStyle = `hsla(${L.hue}, ${sat} %, ${70 + snap * 4} %, ${L.op})`;
+                        ctx.strokeStyle = `hsla(${L.hue}, ${sat}%, ${70 + snap * 4}%, ${L.op})`;
 
                         // Variable thickness
                         ctx.lineWidth = L.w * (1 + p * 0.6 + snap * 0.1);
@@ -3177,7 +3154,7 @@
                         // Double stroke for bloom logic simulation
                         if (p > 0.8) {
                             //                             ctx.shadowBlur = 15;
-                            ctx.shadowColor = `hsla(${L.hue}, 100 %, 50 %, 0.6)`;
+                            ctx.shadowColor = `hsla(${L.hue}, 100%, 50%, 0.6)`;
                         }
                         ctx.stroke();
                         ctx.shadowBlur = 0;
@@ -3255,12 +3232,12 @@
                             // Core White Hot
                             ctx.strokeStyle = `rgba(255, 230, 240, ${L.op})`;
                         } else {
-                            ctx.strokeStyle = `hsla(${L.hue}, 100 %, 75 %, ${L.op})`;
+                            ctx.strokeStyle = `hsla(${L.hue}, 100%, 75%, ${L.op})`;
                         }
 
                         // Glow
                         //                         ctx.shadowBlur = 10 + beat * 20;
-                        ctx.shadowColor = `hsla(${L.hue}, 100 %, 60 %, 0.8)`;
+                        ctx.shadowColor = `hsla(${L.hue}, 100%, 60%, 0.8)`;
                         ctx.stroke();
                         ctx.shadowBlur = 0;
                     }
@@ -3404,10 +3381,10 @@
                     pt.y += pt.vy_burst;
 
                     const sz = pt.sz * (1 - p * 0.2);
-                    drawMiniHeart(pt.x, pt.y, sz, `hsla(${pt.hue}, 90 %, 70 %, 1)`, 1);
+                    drawMiniHeart(pt.x, pt.y, sz, `hsla(${pt.hue}, 90%, 70%, 1)`, 1);
 
                     if (Math.abs(pt.vx_burst) > 1) {
-                        drawMiniHeartGlow(pt.x, pt.y, sz * 2, `hsla(${pt.hue}, 100 %, 80 %, 0.5)`, 1, sz * 3);
+                        drawMiniHeartGlow(pt.x, pt.y, sz * 2, `hsla(${pt.hue}, 100%, 80%, 0.5)`, 1, sz * 3);
                     }
                 });
 
@@ -3483,7 +3460,7 @@
                     const b = Math.floor(lerp(160, pt.tb, ep));
                     const sz = lerp(pt.sz, pt.tsz, ep);
 
-                    drawMiniHeart(pt.x, pt.y, sz, `rgb(${r}, ${g}, ${b})`, 1);
+                    drawMiniHeart(pt.x, pt.y, sz, `rgb(${r},${g},${b})`, 1);
 
                     // Occasional sparkle on locking in
                     if (ep > 0.9 && Math.random() > 0.97) {
@@ -3497,42 +3474,116 @@
             }
 
             // ═══════════════════════════════════════
-            //  FINAL — breathing portrait with shimmer
+            //  FINAL — PERMANENT HEART MOSAIC (No Fade to Photo)
             // ═══════════════════════════════════════
+            let revealTime = 0;
             function drawFinal() {
                 if (currentPage !== 'page-heart-portrait') return;
                 ctx.clearRect(0, 0, W, H);
                 drawBg(0.25);
                 const now = Date.now() * .0006;
 
+                // 1. Draw Particles (Background Layer - The Mosaic)
                 renderSparkles(0.7);
-                // Draw all particles at final positions
+
                 particles.forEach((pt, i) => {
                     const breath = Math.sin(now + i * .06) * .035 + 1;
                     const shimmer = 1.13 + Math.sin(now * 2 + i * .15) * .12;
+                    // Lower opacity slightly as reveal happens to focus attention on photo? 
+                    // No, keep it solid contrast.
                     drawMiniHeart(
                         pt.tx || pt.x, pt.ty || pt.y,
                         pt.tsz * breath,
                         `rgb(${Math.min(255, Math.floor(pt.tr * shimmer))}, ${Math.min(255, Math.floor(pt.tg * shimmer))}, ${Math.min(255, Math.floor(pt.tb * shimmer))})`,
-                        .98
+                        0.98
                     );
                 });
-                // Premium vignette
+
+                // 2. Cinematic Instant Reveal
+                revealTime++;
+
+                // Duration: approx 2.5 seconds (150 frames)
+                const duration = 150;
+                let progress = revealTime / duration;
+                if (progress > 1) progress = 1;
+
+                // Easing: SmoothStep / EaseOut for sexy feel
+                const ease = 1 - Math.pow(1 - progress, 3); // Cubic Ease Out
+
+                const img = document.getElementById('portrait-source');
+                if (img && img.complete) {
+                    ctx.save();
+
+                    // Calculate Scale of Heart Mask
+                    // Start small, expand to cover screen
+                    const maxScale = Math.max(W, H) / 12;
+                    const scale = ease * maxScale;
+
+                    if (scale > 0.05) {
+                        // --- A: Create Heart Path ---
+                        ctx.beginPath();
+                        for (let tt = 0; tt <= Math.PI * 2; tt += 0.05) {
+                            const x = CX + hx(tt, HS * scale);
+                            const y = CY - 15 + hy(tt, HS * scale);
+                            tt === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                        }
+                        ctx.closePath();
+
+                        // --- B: Clip & Draw Image ---
+                        ctx.save();
+                        ctx.clip();
+
+                        // Image Logic: Center Cover
+                        const ratio = img.naturalWidth / img.naturalHeight;
+                        const iH = H;
+                        const iW = iH * ratio;
+                        const idx = (W - iW) / 2;
+
+                        // Cinematic "Ken Burns" Reverse 
+                        // Image starts zoomed in (1.1x) and settles to 1.0x as window opens
+                        const imgKbs = 1.15 - (ease * 0.15);
+
+                        ctx.translate(W / 2, H / 2);
+                        ctx.scale(imgKbs, imgKbs);
+                        ctx.translate(-W / 2, -H / 2);
+
+                        ctx.globalAlpha = 0.8; // Semi-transparent for dreamy effect
+                        ctx.drawImage(img, idx, 0, iW, iH);
+                        ctx.restore(); // End Clip
+
+                        // --- C: Sexy Glowing Border ---
+                        // Starts White/Bright -> Fades to Valentine Pink
+                        // Starts Thick -> Becomes Thin
+                        const edgeWidth = 12 * (1 - ease) + 4;
+                        const r = 255;
+                        const g = Math.floor(63 + (192 * (1 - ease))); // White (255) -> Pink (63)
+                        const b = Math.floor(148 + (107 * (1 - ease))); // White (255) -> Pink (148)
+                        const alpha = 1.0;
+
+                        ctx.lineWidth = edgeWidth;
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                        ctx.lineCap = 'round';
+
+                        // Bloom Glow effect on edge
+                        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
+                        ctx.shadowBlur = 25 * (1 - ease) + 5;
+
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                    ctx.restore();
+                }
+
+                // Overlay Vignette
                 const vig = ctx.createRadialGradient(CX, CY, Math.min(W, H) * .2, CX, CY, Math.max(W, H) * .72);
                 vig.addColorStop(0, 'transparent');
                 vig.addColorStop(.7, 'rgba(0,0,0,0.15)');
                 vig.addColorStop(1, 'rgba(0,0,0,0.45)');
                 ctx.fillStyle = vig;
                 ctx.fillRect(0, 0, W, H);
-                // Soft ambient light from top
-                const topLight = ctx.createLinearGradient(0, 0, 0, H * .3);
-                topLight.addColorStop(0, `rgba(255, 200, 230, ${Math.sin(now) * .015 + .02})`);
-                topLight.addColorStop(1, 'transparent');
-                ctx.fillStyle = topLight;
-                ctx.fillRect(0, 0, W, H * .3);
+
                 heartPortraitAnimId = requestAnimationFrame(drawFinal);
             }
-
             // ═══════════════════════════════════════
             //  MAIN LOOP
             // ═══════════════════════════════════════
@@ -3579,5 +3630,6 @@
 
     </script>
 </body>
+
 
 </html>
