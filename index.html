@@ -119,12 +119,31 @@
         }
 
 
+        :root {
+            --app-height: 100vh;
+        }
+
         /* --- Global Styles --- */
+        html,
+        body {
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Fredoka', sans-serif;
             overflow: hidden;
             background-color: #fff1f2;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23f43f5e" stroke="white" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>') 12 12, auto;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        [id^="page-"],
+        #loading-screen,
+        #modal-broken-heart,
+        #page-game-over {
+            min-height: 100svh;
+            min-height: -webkit-fill-available;
         }
 
         /* Hide all scrollbars */
@@ -807,6 +826,18 @@
             /* Timeline - Better mobile scrolling */
             #timeline-scroll-area {
                 -webkit-overflow-scrolling: touch;
+                padding-left: 18vw !important;
+                padding-right: 18vw !important;
+            }
+
+            #timeline-container {
+                gap: 1rem !important;
+            }
+
+            #timeline-container>div {
+                width: min(84vw, 320px) !important;
+                height: min(72vh, 360px) !important;
+                padding: 1.25rem !important;
             }
 
             /* Lightbox adjustments */
@@ -838,6 +869,26 @@
                 opacity: 0.2 !important;
             }
 
+            #page-dashboard>header,
+            #page-heart-portrait>header,
+            #page-timeline>div.fixed.top-0.left-0.w-full.z-40 {
+                padding-top: calc(0.9rem + env(safe-area-inset-top)) !important;
+            }
+
+            #page-celebration button[onclick*="navigateTo"],
+            #page-quiz button[onclick*="navigateTo"],
+            #page-letter button[onclick*="navigateTo"],
+            #page-reasons button[onclick*="navigateTo"] {
+                top: calc(0.7rem + env(safe-area-inset-top)) !important;
+                left: calc(0.7rem + env(safe-area-inset-left)) !important;
+            }
+
+            #heart-portrait-replay {
+                bottom: calc(0.9rem + env(safe-area-inset-bottom)) !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
             /* Proposal buttons stack vertically on very small screens */
             @media (max-width: 400px) {
                 .flex-row {
@@ -849,6 +900,12 @@
                     width: 100%;
                     max-width: 280px;
                 }
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            body {
+                cursor: auto;
             }
         }
 
@@ -889,6 +946,7 @@
     <audio id="song5" src="song5.mp3" preload="auto" loop></audio>
     <!-- Song 6 for Prank/First Image (No Loop) -->
     <audio id="song6" src="song6.mp3" preload="auto"></audio>
+    <audio id="song7" src="song7.mp3" loop></audio>
 
     <!-- COSMIC BACKGROUND -->
     <canvas id="cosmic-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
@@ -1095,66 +1153,66 @@
                 <p class="text-gray-500 max-w-md mx-auto">Explore the little things that matter.</p>
             </div>
             <!-- Dashboard Grid (Premium Glass Layout) -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
 
                 <!-- QUIZ -->
                 <button onclick="navigateTo('page-quiz')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-12 transition">
-                        <i data-lucide="brain-circuit" class="w-8 h-8 text-purple-600"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-12 transition">
+                        <i data-lucide="brain-circuit" class="w-6 h-6 md:w-8 md:h-8 text-purple-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-lg">Quiz</span>
+                    <span class="font-bold text-gray-700 text-sm md:text-lg">Quiz</span>
                 </button>
 
                 <!-- GALLERY -->
                 <button onclick="navigateTo('page-gallery')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:-rotate-12 transition">
-                        <i data-lucide="image" class="w-8 h-8 text-blue-600"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:-rotate-12 transition">
+                        <i data-lucide="image" class="w-6 h-6 md:w-8 md:h-8 text-blue-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-lg">Memories</span>
+                    <span class="font-bold text-gray-700 text-sm md:text-lg">Memories</span>
                 </button>
 
                 <!-- LETTER -->
                 <button onclick="navigateTo('page-letter')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
-                        <i data-lucide="mail" class="w-8 h-8 text-red-600"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
+                        <i data-lucide="mail" class="w-6 h-6 md:w-8 md:h-8 text-red-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-lg">My Letter</span>
+                    <span class="font-bold text-gray-700 text-sm md:text-lg">My Letter</span>
                 </button>
 
                 <!-- TIMELINE -->
                 <button onclick="navigateTo('page-timeline')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-6 transition">
-                        <i data-lucide="calendar" class="w-8 h-8 text-green-600"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:rotate-6 transition">
+                        <i data-lucide="calendar" class="w-6 h-6 md:w-8 md:h-8 text-green-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-lg">Journey</span>
+                    <span class="font-bold text-gray-700 text-sm md:text-lg">Journey</span>
                 </button>
 
                 <!-- REASONS (LOVE JAR) -->
                 <button onclick="navigateTo('page-reasons')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:shake transition">
-                        <i data-lucide="heart-handshake" class="w-8 h-8 text-yellow-600"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:shake transition">
+                        <i data-lucide="heart-handshake" class="w-6 h-6 md:w-8 md:h-8 text-yellow-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-lg">Love Jar</span>
+                    <span class="font-bold text-gray-700 text-sm md:text-lg">Love Jar</span>
                 </button>
 
                 <!-- MAGIC -->
                 <button onclick="navigateTo('page-heart-portrait')"
-                    class="glass-panel-premium p-6 flex flex-col items-center justify-center gap-4 hover:scale-105 transition duration-300 hover:shadow-2xl group tilt-card h-48">
+                    class="glass-panel-premium p-3 md:p-6 flex flex-col items-center justify-center gap-3 md:gap-4 hover:scale-105 active:scale-95 transition duration-300 hover:shadow-2xl group tilt-card min-h-[9rem] md:h-48 select-none">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-rose-100 to-pink-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
-                        <i data-lucide="sparkles" class="w-8 h-8 text-rose-600"></i>
+                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-rose-100 to-pink-200 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition">
+                        <i data-lucide="sparkles" class="w-6 h-6 md:w-8 md:h-8 text-rose-600"></i>
                     </div>
-                    <span class="font-bold text-gray-700 text-lg">Magic</span>
+                    <span class="font-bold text-gray-700 text-sm md:text-lg">Magic</span>
                 </button>
 
             </div>
@@ -1502,6 +1560,8 @@
         </button>
 
         <!-- Hidden Image for Pixel Sampling -->
+        <!-- Hidden Image for Pixel Sampling -->
+        <!-- Hidden Image for Pixel Sampling -->
         <img id="portrait-source" src="016.jpeg" class="hidden" />
     </div>
 
@@ -1632,7 +1692,8 @@
             let particles = [];
 
             // Configuration
-            const particleCount = 40;
+            const isMobile = window.innerWidth < 768;
+            const particleCount = isMobile ? 20 : 40;
             const connectionDistance = 100;
             const mouseDistance = 150;
 
@@ -1828,7 +1889,7 @@
 
         /* --- Audio System --- */
         function initAudio() {
-            const volumes = { song1: 0.8, song2: 0.9, song3: 0.7, song4: 0.8, song5: 0.9, song6: 1.0 };
+            const volumes = { song1: 0.8, song2: 0.9, song3: 0.7, song4: 0.8, song5: 0.9, song6: 1.0, song7: 1.0 };
             Object.keys(volumes).forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.volume = volumes[id];
@@ -1871,7 +1932,7 @@
                 window.audioCtx.resume();
             }
 
-            ['song1', 'song2', 'song3', 'song4', 'song5', 'song6'].forEach(id => {
+            ['song1', 'song2', 'song3', 'song4', 'song5', 'song6', 'song7'].forEach(id => {
                 const audio = document.getElementById(id);
                 if (id === songId) {
                     audio.play().catch(e => console.log("Interaction needed"));
@@ -1907,9 +1968,11 @@
                 song2: "Heartbreak Anthem 💔",
                 song3: "Celebration Tune 🎉",
                 song4: "Chill Vibes ☕",
-                song5: "My Heart's Voice 💌"
+                song5: "My Heart's Voice 💌",
+                song6: "Feeling Alive 🎸",
+                song7: "Magic Moment ✨"
             };
-            document.getElementById('music-title').innerText = titles[State.currentSongId];
+            document.getElementById('music-title').innerText = titles[State.currentSongId] || 'Playing...';
             document.getElementById('music-status').innerText = State.isMusicPlaying ? "Playing..." : "Paused";
             const bars = document.querySelectorAll('.music-bar');
             bars.forEach(bar => { bar.style.animationPlayState = State.isMusicPlaying ? 'running' : 'paused'; });
@@ -1926,6 +1989,7 @@
                 startCelebrationHearts();
             }
             if (pageId === 'page-dashboard') { playSpecificSong('song4'); }
+            if (pageId === 'page-heart-portrait') { playSpecificSong('song7'); }
             if (pageId === 'page-letter') { playSpecificSong('song5'); } // Start Romantic Song on Entry
             // Heart portrait init is delayed to after currentPage is set (see below)
 
@@ -2822,32 +2886,38 @@
             }
 
             // ═══════════════════════════════════════
-            //  FLOWING LINES (120 lines, smoother)
+            //  FLOWING LINES (Higher Density, Heart Targets)
             // ═══════════════════════════════════════
-            const LINE_CT = 156;
+            const LINE_CT = 320; // Increased density
             const lines = [];
             for (let i = 0; i < LINE_CT; i++) {
+                // Target: Points on the heart curve
                 const t = (i / LINE_CT) * Math.PI * 2;
+                // We want them to form a heart, so tx/ty are the heart path
+                // Add some variety: some on outline, some inside
+                const rScale = Math.random() > 0.3 ? 1 : Math.random() * 0.8 + 0.2;
+
+                const tx = CX + hx(t, HS * rScale);
+                const ty = CY - 15 + hy(t, HS * rScale);
+
+                // Start: Random circle orbit
                 const a = Math.random() * Math.PI * 2;
-                const d = Math.random() * Math.max(W, H) * .38 + Math.max(W, H) * .62;
+                const d = Math.random() * Math.max(W, H) * .45 + Math.max(W, H) * .55;
+
                 lines.push({
                     sx: CX + Math.cos(a) * d, sy: CY + Math.sin(a) * d,
-                    tx: CX + hx(t, HS), ty: CY + hy(t, HS) - 15,
+                    tx: tx, ty: ty,
                     x: CX + Math.cos(a) * d, y: CY + Math.sin(a) * d,
                     vx: 0, vy: 0,
-                    spd: Math.random() * .3 + .7,
-                    w: Math.random() * 1.8 + .8,
-                    op: Math.random() * .35 + .65,
-                    hue: Math.random() * 42 + 320,
-                    trail: [], tmax: Math.floor(Math.random() * 30 + 20),
+                    spd: Math.random() * .15 + .85,
+                    w: Math.random() * 2.2 + 0.6,
+                    op: Math.random() * .4 + .6,
+                    hue: Math.random() * 40 + 325, // Pink/Rose range
+                    trail: [], tmax: Math.floor(Math.random() * 10 + 10), // Shorter trails for precision
                     ph: Math.random() * Math.PI * 2,
-                    glow: Math.random() * .6 + .4,
-                    roamA: Math.random() * Math.PI * 2,
-                    roamB: Math.random() * Math.PI * 2,
-                    roamR: Math.random() * Math.max(W, H) * .22 + Math.max(W, H) * .1,
-                    roamTwist: Math.random() * .8 + .45,
-                    orbit: Math.random() * HS * 13 + HS * 4,
-                    noise: Math.random()
+                    orbit: Math.random() * HS * 5 + HS * 2, // Smaller orbit for phase 1
+                    noise: Math.random(),
+                    rScale: rScale // Remember if it's outline or inner
                 });
             }
             // ═══════════════════════════════════════
@@ -2860,29 +2930,44 @@
 
             function sampleImg() {
                 if (!img || !img.complete || !img.naturalWidth) { setTimeout(sampleImg, 100); return; }
-                const COLS = 112;
+
+                // Optimize Resolution for Performance
+                // User Request: More pixels, remove white pixels (transparent)
+                const isMobile = window.innerWidth < 768;
+                const maxParticles = isMobile ? 3000 : 9000;
                 const ratio = img.naturalHeight / img.naturalWidth;
+
+                // Calculate COLS based on target count
+                // cols * (cols * ratio) = maxParticles
+                // cols^2 * ratio = maxParticles -> cols = sqrt(max / ratio)
+                const COLS = Math.floor(Math.sqrt(maxParticles / ratio));
                 const ROWS = Math.floor(COLS * ratio);
-                const pW = Math.min(W, H) * 0.66;
+
+                const pW = Math.min(W, H) * 0.65;
                 const pH = pW * ratio;
                 tc.width = COLS; tc.height = ROWS;
                 tctx.drawImage(img, 0, 0, COLS, ROWS);
+
                 try {
                     const id = tctx.getImageData(0, 0, COLS, ROWS);
                     const d = id.data;
                     portraitData = [];
                     const cw = pW / COLS, ch = pH / ROWS;
                     const ox = CX - pW / 2, oy = CY - pH / 2;
+
                     for (let r = 0; r < ROWS; r++) {
                         for (let c = 0; c < COLS; c++) {
                             const idx = (r * COLS + c) * 4;
                             const R = d[idx], G = d[idx + 1], B = d[idx + 2], A = d[idx + 3];
                             const bri = (R + G + B) / 3;
-                            if (bri < 6 || A < 20) continue;
+                            // stricter threshold for distinct shape
+                            // User request: remove white pixels (treat as transparent)
+                            if (bri < 15 || A < 50 || (bri > 230 && R > 200 && G > 200 && B > 200)) continue;
+
                             portraitData.push({
                                 x: ox + c * cw + cw / 2, y: oy + r * ch + ch / 2,
                                 r: R, g: G, b: B,
-                                sz: Math.max(cw, ch) * 0.46
+                                sz: Math.max(cw, ch) * 0.52 // Ultra-high density size tuning
                             });
                         }
                     }
@@ -2891,13 +2976,13 @@
             }
             function fallbackPortrait() {
                 const sz = Math.min(W, H) * .4; portraitData = [];
-                for (let i = 0; i < 72; i++)for (let j = 0; j < 72; j++) {
-                    const nx = (i / 72) * 2 - 1, ny = (j / 72) * 2 - 1;
+                for (let i = 0; i < 192; i++)for (let j = 0; j < 192; j++) {
+                    const nx = (i / 192) * 2 - 1, ny = (j / 192) * 2 - 1;
                     if (Math.pow(nx * nx + ny * ny - 1, 3) - nx * nx * ny * ny * ny <= 0)
                         portraitData.push({
                             x: CX + nx * sz * .45, y: CY + ny * sz * .45,
                             r: 200 + Math.floor(Math.random() * 55), g: 50 + Math.floor(Math.random() * 80),
-                            b: 100 + Math.floor(Math.random() * 55), sz: sz / 72 * .72
+                            b: 100 + Math.floor(Math.random() * 55), sz: sz / 192 * .88
                         });
                 }
                 portraitReady = true;
@@ -2908,6 +2993,7 @@
             //  DRAW HEART SHAPE (optimized)
             // ═══════════════════════════════════════
             function drawMiniHeart(x, y, s, col, a) {
+                if (s < 0.5) return;
                 ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y);
                 ctx.fillStyle = col; ctx.beginPath();
                 ctx.moveTo(0, s * .3);
@@ -2959,420 +3045,434 @@
             // ═══════════════════════════════════════
             //  PHASE 1 — FLOWING LINES
             // ═══════════════════════════════════════
+            // ═══════════════════════════════════════
+            //  PHASE 1 — FLOWING LINES (Silk & Ink Style)
+            // ═══════════════════════════════════════
             function phase1(elapsed) {
                 const p = clamp01(elapsed / T1);
                 renderSparkles(0.34 + p * 0.24, 1);
                 renderEmbers(elapsed, 0.36 + p * 0.28);
-                lines.forEach(L => {
-                    const drift = 1 - p * 0.74;
-                    const orbitX = Math.cos(elapsed * (0.58 + L.noise * 0.24) + L.ph) * L.orbit * drift;
-                    const orbitY = Math.sin(elapsed * (0.72 + L.noise * 0.2) + L.ph * 1.17) * L.orbit * 0.78 * drift;
-                    const inward = clamp01((p - .48) / .52);
-                    const tx = lerp(lerp(L.sx, CX + orbitX, p * .9), L.tx, inward * .28);
-                    const ty = lerp(lerp(L.sy, CY + orbitY, p * .9), L.ty, inward * .28);
 
-                    L.vx = (L.vx + (tx - L.x) * .032) * .9;
-                    L.vy = (L.vy + (ty - L.y) * .032) * .9;
+                lines.forEach(L => {
+                    const drift = 1 - p * 0.6;
+                    // Sexy, slow fluid motion
+                    const orbitX = Math.cos(elapsed * (0.3 + L.noise * 0.1) + L.ph) * L.orbit * drift;
+                    const orbitY = Math.sin(elapsed * (0.4 + L.noise * 0.1) + L.ph) * L.orbit * 0.8 * drift;
+
+                    const inward = clamp01((p - .55) / .45); // Late entry
+
+                    const tx = lerp(lerp(L.sx, CX + orbitX, p * .8), L.tx, inward * .35);
+                    const ty = lerp(lerp(L.sy, CY + orbitY, p * .8), L.ty, inward * .35);
+
+                    // Fluid viscosity
+                    L.vx = (L.vx + (tx - L.x) * .025) * .91;
+                    L.vy = (L.vy + (ty - L.y) * .025) * .91;
                     L.x += L.vx;
                     L.y += L.vy;
 
                     L.trail.push({ x: L.x, y: L.y });
                     if (L.trail.length > L.tmax) L.trail.shift();
+
                     if (L.trail.length > 2) {
+                        ctx.beginPath();
+                        // Variable width trail (Ink effect)
+                        ctx.moveTo(L.trail[0].x, L.trail[0].y);
                         for (let j = 1; j < L.trail.length; j++) {
-                            const ta = j / L.trail.length;
-                            ctx.beginPath();
-                            ctx.moveTo(L.trail[j - 1].x, L.trail[j - 1].y);
                             ctx.lineTo(L.trail[j].x, L.trail[j].y);
-                            ctx.strokeStyle = `hsla(${L.hue},90%,72%,${ta * L.op * (0.22 + p * 0.56)})`;
-                            ctx.lineWidth = L.w * (0.25 + ta * .9);
-                            ctx.lineCap = 'round';
-                            ctx.stroke();
                         }
+                        // Gradient stroke? Too expensive. 
+                        // Use alpha taper
+                        const alpha = L.op * (0.3 + p * 0.6);
+                        ctx.strokeStyle = `hsla(${L.hue + Math.sin(elapsed) * 10}, 90%, 65%, ${alpha})`;
+                        ctx.lineWidth = L.w * (0.6 + p * 0.4);
+                        ctx.lineCap = 'round';
+                        ctx.stroke();
                     }
                 });
-                if (p > .62) {
-                    const ghost = clamp01((p - .62) / .38);
-                    traceHeartPath(1.02, -15, .013);
-                    ctx.strokeStyle = `rgba(255,180,220,${ghost * .2})`;
-                    ctx.lineWidth = 1.2;
-                    ctx.stroke();
-                }
             }
 
             // ═══════════════════════════════════════
-            //  PHASE 2 — HEART FORMATION
+            //  PHASE 2 - HEART FORMATION (Snap & Electric)
             // ═══════════════════════════════════════
             function phase2(t) {
                 const p = easeIO3(t);
                 const settle = easeOut4(p);
                 const loose = 1 - settle;
-                renderSparkles(0.46 + p * 0.26, 0.82);
-                renderEmbers(startTime * .001 + t * 3.4, 0.54 + p * .3);
 
-                const coreRad = HS * (21 + settle * 9);
-                const core = ctx.createRadialGradient(CX, CY - 15, HS * 2, CX, CY - 15, coreRad);
-                core.addColorStop(0, `rgba(254, 205, 211, ${0.12 + settle * 0.16})`); // Valentine-200
-                core.addColorStop(.55, `rgba(244, 63, 94, ${0.06 + settle * 0.12})`); // Valentine-500
-                core.addColorStop(1, 'rgba(159, 18, 57, 0)'); // Valentine-800
+                renderSparkles(0.5, 0.8);
+
+                // Deep Premium Glow
+                const coreRad = HS * (22 * p);
+                const core = ctx.createRadialGradient(CX, CY - 15, 0, CX, CY - 15, coreRad);
+                core.addColorStop(0, `rgba(244, 63, 94, ${0.15 * p})`);
+                core.addColorStop(0.4, `rgba(159, 18, 57, ${0.05 * p})`);
+                core.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = core;
-                ctx.fillRect(CX - coreRad, CY - 15 - coreRad, coreRad * 2, coreRad * 2);
+                ctx.fillRect(0, 0, W, H);
 
                 lines.forEach(L => {
-                    const swayA = Math.sin(t * 10.5 + L.ph * 1.25) * (7 + L.w * 6) * loose;
-                    const swayB = Math.cos(t * 8.7 + L.ph * .9) * (4 + L.w * 4) * loose;
-                    const tx = L.tx + Math.cos(L.ph) * swayA - Math.sin(L.ph) * swayB;
-                    const ty = L.ty + Math.sin(L.ph) * swayA + Math.cos(L.ph) * swayB;
+                    // Wild, organic motion before locking in
+                    const noise = L.noise * 2 + 0.5; // High variance
 
-                    L.vx = (L.vx + (tx - L.x) * (.034 + settle * .04)) * .88;
-                    L.vy = (L.vy + (ty - L.y) * (.034 + settle * .04)) * .88;
+                    // Large sweep
+                    const sway = Math.sin(t * (5 + noise) + L.ph) * 25 * loose * noise;
+
+                    // Random snap timing with overshoot
+                    // Some snap early, some late
+                    const localP = clamp01((p - L.noise * 0.25) / 0.75);
+                    // Elastic snap
+                    const snap = Math.sin(localP * Math.PI * 7) * 12 * (1 - localP) * localP;
+
+                    const tx = L.tx + Math.cos(L.ph) * (sway + snap);
+                    const ty = L.ty + Math.sin(L.ph) * (sway + snap);
+
+                    // Variable speed - some are lazy, some fast
+                    const baseSpeed = 0.03 + L.noise * 0.05;
+                    const speed = baseSpeed + settle * 0.12;
+
+                    L.vx = (L.vx + (tx - L.x) * speed) * .85;
+                    L.vy = (L.vy + (ty - L.y) * speed) * .85;
+
                     L.x += L.vx;
                     L.y += L.vy;
+
+                    if (L.trail.length > 6) L.trail.shift();
                     L.trail.push({ x: L.x, y: L.y });
-                    if (L.trail.length > L.tmax) L.trail.shift();
+
                     if (L.trail.length > 2) {
+                        ctx.beginPath();
+                        ctx.moveTo(L.trail[0].x, L.trail[0].y);
                         for (let j = 1; j < L.trail.length; j++) {
-                            const ta = j / L.trail.length;
-                            ctx.beginPath();
-                            ctx.moveTo(L.trail[j - 1].x, L.trail[j - 1].y);
                             ctx.lineTo(L.trail[j].x, L.trail[j].y);
-                            ctx.strokeStyle = `hsla(${L.hue},90%,72%,${ta * L.op * (0.34 + settle * 0.72)})`;
-                            ctx.lineWidth = L.w * (0.26 + ta * 1.1);
-                            ctx.lineCap = 'round';
-                            ctx.stroke();
                         }
+                        // Electric glow intensity
+                        const intensity = 0.5 + p * 1.5;
+                        const sat = 80 + p * 20;
+                        ctx.strokeStyle = `hsla(${L.hue}, ${sat}%, ${70 + snap * 4}%, ${L.op})`;
+
+                        // Variable thickness
+                        ctx.lineWidth = L.w * (1 + p * 0.6 + snap * 0.1);
+
+                        // Double stroke for bloom logic simulation
+                        if (p > 0.8) {
+                            //                             ctx.shadowBlur = 15;
+                            ctx.shadowColor = `hsla(${L.hue}, 100%, 50%, 0.6)`;
+                        }
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
                     }
                 });
-
-                const shell = clamp01((p - .1) / .9);
-                ctx.save();
-                // Faux 3D depth stack for heart formation
-                const depthLayers = Math.floor(5 + settle * 10);
-                for (let i = depthLayers; i > 0; i--) {
-                    const off = i * .46;
-                    traceHeartPath(1.01, -15 + off, .012);
-                    ctx.fillStyle = `rgba(136, 19, 55, ${0.04 + settle * 0.03})`; // Valentine-900
-                    ctx.fill();
-                }
-                traceHeartPath(1.045, -15, .011);
-                const shellFill = ctx.createRadialGradient(CX, CY - 15, HS * 1.5, CX, CY - 15, HS * 16.5);
-                shellFill.addColorStop(0, `rgba(255, 228, 230, ${0.16 + shell * 0.2})`); // Valentine-100
-                shellFill.addColorStop(.35, `rgba(251, 113, 133, ${0.16 + shell * 0.18})`); // Valentine-400
-                shellFill.addColorStop(.7, `rgba(225, 29, 72, ${0.1 + shell * 0.15})`); // Valentine-600
-                shellFill.addColorStop(1, 'rgba(159, 18, 57, 0)'); // Valentine-800
-                ctx.fillStyle = shellFill;
-                ctx.fill();
-
-                ctx.shadowColor = `rgba(244, 63, 94, ${shell * 0.65})`; // Valentine-500 Glow
-                ctx.shadowBlur = 34 + shell * 26;
-                traceHeartPath(1.0, -15, .0095);
-                ctx.strokeStyle = `rgba(255, 241, 242, ${0.3 + shell * 0.56})`; // Valentine-50
-                ctx.lineWidth = 1.9 + shell * 1.35;
-                ctx.stroke();
-                ctx.shadowBlur = 0;
-
-                if (shell > .52) {
-                    const polish = clamp01((shell - .52) / .48);
-                    traceHeartPath(1.0, -15, .01);
-                    ctx.save();
-                    ctx.clip();
-                    const sweepShift = Math.sin(t * Math.PI * 2.3) * HS * 2.3;
-                    const sweep = ctx.createLinearGradient(
-                        CX - HS * 13 + sweepShift,
-                        CY - HS * 16,
-                        CX + HS * 13 + sweepShift,
-                        CY + HS * 11
-                    );
-                    sweep.addColorStop(0, 'rgba(255,255,255,0)');
-                    sweep.addColorStop(.46, `rgba(255,255,255,${polish * 0.28})`);
-                    sweep.addColorStop(.62, `rgba(255, 205, 211, ${polish * 0.2})`); // Valentine-200
-                    sweep.addColorStop(1, 'rgba(255,255,255,0)');
-                    ctx.fillStyle = sweep;
-                    ctx.fillRect(CX - HS * 20, CY - HS * 20, HS * 40, HS * 40);
-                    ctx.restore();
-                }
-                ctx.restore();
             }
 
-            // ═══════════════════════════════════════
-            //  PHASE 3 — PULSE (rebuilt from scratch)
-            // ═══════════════════════════════════════
+            // =======================================
+            //  PHASE 3 - PULSE (Chromatic Aberration & Reverb)
+            // =======================================
             function phase3(t) {
                 renderSparkles(0.62, 0.6);
-                renderEmbers(startTime * .001 + t * 4.8, 0.72);
+
+                // Beat Logic
+                const beatCycle = (t * 2.2) % 1;
+                let beat = 0;
+                if (beatCycle < 0.15) beat = Math.sin(beatCycle / 0.15 * Math.PI);
+                else if (beatCycle > 0.25 && beatCycle < 0.45) beat = Math.sin((beatCycle - 0.25) / 0.2 * Math.PI) * 0.6;
+
+                // Reverb ripple
+                const reverb = Math.max(0, beat - 0.2) * Math.sin(t * 50) * 0.05;
+
+                const scale = 1 + beat * 0.15 + reverb;
+
+                // Chromatic Pulse (Background Flash)
+                if (beat > 0.8) {
+                    ctx.save();
+                    ctx.fillStyle = `rgba(255, 255, 255, ${(beat - 0.8) * 0.2})`;
+                    ctx.globalCompositeOperation = 'overlay';
+                    ctx.fillRect(0, 0, W, H);
+                    ctx.restore();
+                }
+
                 lines.forEach(L => {
-                    L.vx = (L.vx + (L.tx - L.x) * .065) * .84;
-                    L.vy = (L.vy + (L.ty - L.y) * .065) * .84;
-                    L.x += L.vx;
-                    L.y += L.vy;
+                    // Drift
+                    const drift = Math.sin(t * 2 + L.ph) * 3;
+
+                    const dx = L.tx - CX;
+                    const dy = L.ty - (CY - 15);
+
+                    const targetX = CX + dx * scale + Math.cos(L.ph) * drift;
+                    const targetY = (CY - 15) + dy * scale + Math.sin(L.ph) * drift;
+
+                    L.vx = (L.vx + (targetX - L.x) * .25) * .72;
+                    L.vy = (L.vy + (targetY - L.y) * .25) * .72;
+                    L.x += L.vx; L.y += L.vy;
+
+                    if (L.trail.length > 5) L.trail.shift();
                     L.trail.push({ x: L.x, y: L.y });
-                    if (L.trail.length > 16) L.trail.shift();
+
                     if (L.trail.length > 2) {
-                        for (let j = 1; j < L.trail.length; j++) {
-                            const ta = j / L.trail.length;
-                            ctx.beginPath();
-                            ctx.moveTo(L.trail[j - 1].x, L.trail[j - 1].y);
-                            ctx.lineTo(L.trail[j].x, L.trail[j].y);
-                            ctx.strokeStyle = `hsla(${L.hue},90%,74%,${ta * L.op * .24})`;
-                            ctx.lineWidth = L.w * (.2 + ta * .72);
-                            ctx.lineCap = 'round';
+                        // Regular Draw
+                        ctx.beginPath();
+                        ctx.moveTo(L.trail[0].x, L.trail[0].y);
+                        for (let j = 1; j < L.trail.length; j++) ctx.lineTo(L.trail[j].x, L.trail[j].y);
+
+                        ctx.lineWidth = L.w * (1 + beat);
+                        ctx.lineCap = 'round';
+
+                        // Chromatic Aberration Effect on strong beat
+                        if (beat > 0.5) {
+                            // Red Channel Shift
+                            ctx.save();
+                            ctx.globalCompositeOperation = 'screen';
+                            ctx.translate(-2 * beat, 0);
+                            ctx.strokeStyle = `rgba(255, 0, 100, ${L.op})`;
                             ctx.stroke();
+
+                            // Blue Channel Shift
+                            ctx.translate(4 * beat, 0);
+                            ctx.strokeStyle = `rgba(0, 200, 255, ${L.op})`;
+                            ctx.stroke();
+                            ctx.restore();
+
+                            // Core White Hot
+                            ctx.strokeStyle = `rgba(255, 230, 240, ${L.op})`;
+                        } else {
+                            ctx.strokeStyle = `hsla(${L.hue}, 100%, 75%, ${L.op})`;
                         }
+
+                        // Glow
+                        //                         ctx.shadowBlur = 10 + beat * 20;
+                        ctx.shadowColor = `hsla(${L.hue}, 100%, 60%, 0.8)`;
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
                     }
                 });
-
-                // Exactly two cinematic beats across pulse phase
-                const hit1 = gauss(t, .28, .085);
-                const hit2 = gauss(t, .69, .095) * .95;
-                const tail = gauss(t, .9, .16) * .12;
-                const pulse = clamp01(hit1 + hit2 + tail);
-                const core = clamp01(hit1 * 1.14 + hit2 * 1.02);
-                const scaleX = 1 + core * .068 - tail * .008;
-                const scaleY = 1 + core * .17 - tail * .02;
-
-                for (let layer = 0; layer < 3; layer++) {
-                    const radius = HS * (18 + layer * 5 + pulse * (5 + layer * 2));
-                    const aura = ctx.createRadialGradient(CX, CY - 15, HS * 2, CX, CY - 15, radius);
-                    const alpha = (.14 - layer * .035) * (.48 + pulse);
-                    aura.addColorStop(0, `rgba(253, 164, 175, ${alpha})`); // Valentine-300
-                    aura.addColorStop(.55, `rgba(251, 113, 133, ${alpha * .45})`); // Valentine-400
-                    aura.addColorStop(1, 'rgba(159, 18, 57, 0)'); // Valentine-800
-                    ctx.fillStyle = aura;
-                    ctx.fillRect(CX - radius, CY - 15 - radius, radius * 2, radius * 2);
-                }
-
-                ctx.save();
-                ctx.translate(CX, CY - 15);
-                ctx.scale(scaleX, scaleY);
-                ctx.translate(-CX, -(CY - 15));
-
-                // 3D depth body for pulse
-                const depth = Math.floor(6 + pulse * 11);
-                for (let i = depth; i > 0; i--) {
-                    const off = i * .42;
-                    traceHeartPath(1.0, -15 + off, .011);
-                    ctx.fillStyle = `rgba(136, 19, 55, ${0.04 + pulse * 0.028})`; // Valentine-900
-                    ctx.fill();
-                }
-
-                traceHeartPath(1.0, -15, .0075);
-                const body = ctx.createLinearGradient(CX - HS * 11, CY - HS * 14, CX + HS * 12, CY + HS * 12);
-                body.addColorStop(0, `rgba(255,255,255,${.44 + pulse * .2})`);
-                body.addColorStop(.24, `rgba(254, 205, 211, ${.62 + pulse * .24})`); // Valentine-200
-                body.addColorStop(.56, `rgba(244, 63, 94, ${.6 + pulse * .24})`); // Valentine-500
-                body.addColorStop(1, `rgba(225, 29, 72, ${.62 + pulse * .2})`); // Valentine-600
-                ctx.fillStyle = body;
-                ctx.shadowColor = `rgba(251, 113, 133, ${.56 + pulse * .34})`; // Valentine-400
-                ctx.shadowBlur = 38 + pulse * 44;
-                ctx.fill();
-                ctx.shadowBlur = 0;
-
-                traceHeartPath(1.0, -15, .01);
-                ctx.save();
-                ctx.clip();
-                const sheenShift = Math.sin(t * Math.PI * 4.5) * HS * 2.9;
-                const sheen = ctx.createLinearGradient(
-                    CX - HS * 17 + sheenShift,
-                    CY - HS * 17,
-                    CX + HS * 14 + sheenShift,
-                    CY + HS * 12
-                );
-                sheen.addColorStop(0, 'rgba(255,255,255,0)');
-                sheen.addColorStop(.45, `rgba(255,255,255,${.14 + pulse * .18})`);
-                sheen.addColorStop(.6, `rgba(254, 205, 211, ${.1 + pulse * .12})`); // Valentine-200
-                sheen.addColorStop(1, 'rgba(255,255,255,0)');
-                ctx.fillStyle = sheen;
-                ctx.fillRect(CX - HS * 21, CY - HS * 20, HS * 42, HS * 40);
-                ctx.restore();
-
-                traceHeartPath(1.0, -15, .0085);
-                ctx.strokeStyle = `rgba(255, 241, 242, ${.38 + pulse * .46})`; // Valentine-50
-                ctx.lineWidth = 2.2 + pulse * 1.45;
-                ctx.stroke();
-                traceHeartPath(1.035, -15, .01);
-                ctx.strokeStyle = `rgba(253, 164, 175, ${.16 + pulse * .28})`; // Valentine-300
-                ctx.lineWidth = 1.35;
-                ctx.stroke();
-                ctx.restore();
-
-                const ring1 = clamp01((t - .28) / .36);
-                if (t >= .28 && ring1 <= 1) {
-                    const s1 = 1 + ring1 * .3;
-                    ctx.save();
-                    ctx.translate(CX, CY - 15);
-                    ctx.scale(s1, s1);
-                    ctx.translate(-CX, -(CY - 15));
-                    traceHeartPath(1.0, -15, .012);
-                    ctx.strokeStyle = `rgba(254, 205, 211, ${(1 - ring1) * (.2 + hit1 * .24)})`; // Valentine-200
-                    ctx.lineWidth = 2.2;
-                    ctx.stroke();
-                    ctx.restore();
-                }
-
-                const ring2 = clamp01((t - .69) / .3);
-                if (t >= .69 && ring2 <= 1) {
-                    const s2 = 1 + ring2 * .24;
-                    ctx.save();
-                    ctx.translate(CX, CY - 15);
-                    ctx.scale(s2, s2);
-                    ctx.translate(-CX, -(CY - 15));
-                    traceHeartPath(1.0, -15, .012);
-                    ctx.strokeStyle = `rgba(251, 113, 133, ${(1 - ring2) * (.16 + hit2 * .22)})`; // Valentine-400
-                    ctx.lineWidth = 1.8;
-                    ctx.stroke();
-                    ctx.restore();
-                }
-
             }
 
-            // ═══════════════════════════════════════
-            //  PARTICLES — dynamic count matching portrait
-            // ═══════════════════════════════════════
-            let particles = [];
 
+
+            // =======================================
+            //  PHASE 4 - BURST (Safe & Strong)
+            // =======================================
+            // =======================================
+            //  PARTICLE LOGIC (Burst & Portrait)
+            // =======================================
             function createParticles() {
-                const count = portraitData.length > 0 ? portraitData.length : 4200;
                 particles = [];
-                for (let i = 0; i < count; i++) {
-                    let px, py, ok = false;
-                    while (!ok) {
-                        px = (Math.random() - .5) * HS * 2.6;
-                        py = (Math.random() - .5) * HS * 2.6;
-                        const nx = px / (HS * 1.1), ny = -py / (HS * 1.1);
-                        if (Math.pow(nx * nx + ny * ny - 1, 3) - nx * nx * ny * ny * ny <= 0) ok = true;
-                    }
-                    const angle = Math.atan2(py, px);
-                    const speed = Math.random() * 5 + 3;
+                // Explode existing lines
+                lines.forEach(L => {
                     particles.push({
-                        x: CX + px, y: CY - 15 + py,
-                        ox: CX + px, oy: CY - 15 + py,
-                        vx: Math.cos(angle) * speed + (Math.random() - .5) * 7,
-                        vy: Math.sin(angle) * speed + (Math.random() - .5) * 7 - 1.8,
-                        bx: CX + (Math.random() - .5) * W * 1.75,
-                        by: CY + (Math.random() - .5) * H * 1.75,
-                        jx: Math.random() * 70 + 25,
-                        jy: Math.random() * 70 + 25,
-                        tx: 0, ty: 0,
-                        tr: 255, tg: 100, tb: 160,
-                        sz: Math.random() * 3 + 1.5,
-                        tsz: 3.8,
-                        hue: Math.random() * 60 + 310,
-                        dr: Math.random() * Math.PI * 2,
-                        ds: Math.random() * .015 + .003,
-                        da: Math.random() * 26 + 10,
-                        depth: Math.random(),
-                        delay: Math.random() * .35, // stagger assembly
-                        burstDelay: Math.random() * .24,
-                        burstR: Math.random() * Math.max(W, H) * .38 + Math.max(W, H) * .22
+                        x: L.x, y: L.y,
+                        hue: L.hue,
+                        sz: L.w * 1.5,
+                        vx_burst: undefined, vy_burst: undefined,
+                        tx: CX + (Math.random() - 0.5) * 10, ty: CY - 15 + (Math.random() - 0.5) * 10, // Initial temp target
+                        tr: 255, tg: 60, tb: 100, tsz: 2, delay: Math.random()
+                    });
+                });
+                // Fill if fewer than portrait needs (approx)
+                while (particles.length < 1200) {
+                    const ang = Math.random() * Math.PI * 2;
+                    const d = Math.random() * HS * 0.8;
+                    particles.push({
+                        x: CX + Math.cos(ang) * d, y: CY - 15 + Math.sin(ang) * d,
+                        hue: Math.random() * 40 + 330,
+                        sz: Math.random() * 2 + 1,
+                        vx_burst: undefined, vy_burst: undefined,
+                        tr: 255, tg: 60, tb: 100, tsz: 2, delay: Math.random()
                     });
                 }
             }
-
             function assignTargets() {
-                if (!portraitReady || !portraitData.length) return;
-                particles.forEach((pt, i) => {
-                    const c = portraitData[i % portraitData.length];
-                    pt.tx = c.x; pt.ty = c.y;
-                    pt.tr = Math.min(255, Math.floor(c.r * 1.16 + 12));
-                    pt.tg = Math.min(255, Math.floor(c.g * 1.16 + 12));
-                    pt.tb = Math.min(255, Math.floor(c.b * 1.16 + 12));
-                    pt.tsz = c.sz * .95;
+                if (!portraitReady || portraitData.length === 0) return;
+
+                // 1. Spatial Sort for "Morph" feel (already good)
+                particles.sort((a, b) => {
+                    const dy = a.y - b.y;
+                    if (Math.abs(dy) > 5) return dy;
+                    return a.x - b.x;
                 });
+
+                // 2. Map & Assign Delay calculation
+                const cx = CX, cy = CY;
+
+                portraitData.forEach((pd, i) => {
+                    let pt;
+                    if (i < particles.length) {
+                        pt = particles[i];
+                    } else {
+                        pt = {
+                            x: pd.x + (Math.random() - 0.5) * 50,
+                            y: pd.y + (Math.random() - 0.5) * 50,
+                            sz: 0,
+                            hue: 340,
+                            vx_burst: 0, vy_burst: 0,
+                            delay: 0
+                        };
+                        particles.push(pt);
+                    }
+                    pt.tx = pd.x;
+                    pt.ty = pd.y;
+                    pt.tr = pd.r;
+                    pt.tg = pd.g;
+                    pt.tb = pd.b;
+                    pt.tsz = pd.sz;
+
+                    // STRUCTURED DELAY for "Natural Construction"
+                    // Spiral Outward from center
+                    const dx = pd.x - cx;
+                    const dy = pd.y - cy;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx);
+
+                    // Normalize
+                    const maxDist = Math.max(W, H) * 0.5;
+                    const dNorm = Math.min(1, dist / maxDist);
+
+                    // Delay = Distance (core forms first) + slightly spiral angle
+                    pt.delay = dNorm * 0.8 + (Math.sin(angle * 3) * 0.1) + Math.random() * 0.1;
+
+                    // Ensure delay is 0-1
+                    if (pt.delay < 0) pt.delay = 0;
+                    if (pt.delay > 1) pt.delay = 1;
+                });
+
+                // Trim excess
+                if (particles.length > portraitData.length) {
+                    particles.splice(portraitData.length);
+                }
             }
 
-            // ═══════════════════════════════════════
-            //  PHASE 4 — DISPERSE
-            // ═══════════════════════════════════════
             function phase4(t) {
                 const p = easeOut4(t);
                 renderSparkles(0.38 + p * 0.28, 0.9);
-                // Bloom layer
                 bctx.clearRect(0, 0, W, H);
+
+                // Initial White Flash
+                if (t < 0.15) {
+                    const flash = (0.15 - t) * 6;
+                    ctx.fillStyle = `rgba(255, 255, 255, ${flash})`;
+                    ctx.fillRect(0, 0, W, H);
+                }
+
+                // Safety: Ensure particles exist
+                if (particles.length === 0) createParticles();
+
                 particles.forEach(pt => {
-                    const bp = clamp01((t - pt.burstDelay) / (1 - pt.burstDelay));
-                    const ep = smootherStep(bp);
-                    pt.dr += pt.ds * (.7 + (1 - ep) * 1.3);
-                    const jitter = (1 - ep) * (1 - ep);
-                    const spread = jitter * pt.burstR * .012;
-                    pt.x = lerp(pt.ox, pt.bx, ep) + Math.sin(pt.dr * 1.7) * pt.jx * jitter;
-                    pt.y = lerp(pt.oy, pt.by, ep) + Math.cos(pt.dr * 1.3) * pt.jy * jitter;
-                    const dx = Math.sin(pt.dr) * (pt.da * (.26 + ep * .58) + spread);
-                    const dy = Math.cos(pt.dr * .7) * (pt.da * .2 + spread * .75);
-                    const drawX = pt.x + dx, drawY = pt.y + dy;
-                    const al = .43 + ep * .44;
-                    const sz = pt.sz * (1 + (1 - p) * .25);
-                    drawMiniHeart(drawX, drawY, sz, `hsla(${pt.hue},82%,72%,1)`, al);
-                    // Bloom glow on separate canvas
-                    if (ep < .74 && pt.depth > .62) {
-                        drawMiniHeartGlow(drawX, drawY, sz * 1.45, `hsla(${pt.hue},100%,75%,.3)`, (1 - ep) * .7, sz * 5);
+                    // Init physics on first run
+                    if (typeof pt.vx_burst === 'undefined') {
+                        // Explode from current pos (which should be near heart center logic)
+                        // If particles are new, spread them from center
+                        if (phase === 4 && t < 0.05) {
+                            pt.x = CX + (Math.random() - 0.5) * HS * 10;
+                            pt.y = CY + (Math.random() - 0.5) * HS * 10;
+                        }
+
+                        const dx = pt.x - CX;
+                        const dy = pt.y - (CY - 15);
+                        const ang = Math.atan2(dy, dx);
+                        const force = Math.random() * 25 + 10;
+
+                        pt.vx_burst = Math.cos(ang) * force;
+                        pt.vy_burst = Math.sin(ang) * force;
+                    }
+
+                    // Physics
+                    pt.vx_burst *= 0.95; // Drag
+                    pt.vy_burst *= 0.95;
+                    pt.vy_burst += 0.1; // Grav
+
+                    pt.x += pt.vx_burst;
+                    pt.y += pt.vy_burst;
+
+                    const sz = pt.sz * (1 - p * 0.2);
+                    drawMiniHeart(pt.x, pt.y, sz, `hsla(${pt.hue}, 90%, 70%, 1)`, 1);
+
+                    if (Math.abs(pt.vx_burst) > 1) {
+                        drawMiniHeartGlow(pt.x, pt.y, sz * 2, `hsla(${pt.hue}, 100%, 80%, 0.5)`, 1, sz * 3);
                     }
                 });
-                // Composite bloom
-                ctx.save(); ctx.globalAlpha = .24 * (1 - p);
+
+                ctx.save(); ctx.globalAlpha = 0.5;
                 ctx.drawImage(bloomCanvas, 0, 0);
                 ctx.restore();
             }
 
             // ═══════════════════════════════════════
-            //  PHASE 5 — PORTRAIT ASSEMBLY
+            //  PHASE 5 — REASSEMBLE (Vortex)
             // ═══════════════════════════════════════
             function phase5(t) {
                 const p = easeIO5(t);
                 renderSparkles(.5 + p * .34, .72);
                 bctx.clearRect(0, 0, W, H);
+
                 particles.forEach((pt, i) => {
-                    const dp = Math.max(0, Math.min(1, (t - pt.delay) / (1 - pt.delay)));
-                    const pp = smootherStep(dp);
-                    const tgtX = pt.tx || CX, tgtY = pt.ty || CY;
-                    const gather = .012 + pp * .13;
-                    pt.x += (tgtX - pt.x) * gather;
-                    pt.y += (tgtY - pt.y) * gather;
-                    const dm = 1 - pp;
-                    pt.dr += pt.ds * dm * .55;
-                    const wob = dm * dm;
-                    const dx = Math.sin(pt.dr) * pt.da * wob * .08;
-                    const dy = Math.cos(pt.dr * .7) * pt.da * wob * .06;
-                    const drawX = pt.x + dx, drawY = pt.y + dy;
-                    const r = Math.floor(lerp(255, pt.tr, pp));
-                    const g = Math.floor(lerp(100, pt.tg, pp));
-                    const b = Math.floor(lerp(160, pt.tb, pp));
-                    const sz = lerp(pt.sz, pt.tsz, pp * pp);
-                    const al = .58 + pp * .4;
-                    drawMiniHeart(drawX, drawY, sz, `rgb(${r},${g},${b})`, al);
-                    // Glow during assembly
-                    if (pp < .52 && pt.depth > .66) {
-                        drawMiniHeartGlow(drawX, drawY, sz * 1.22, `rgba(${r},${g},${b},.2)`, 1 - pp, sz * 3.8);
+                    const tx = pt.tx || CX;
+                    const ty = pt.ty || CY;
+
+                    // Organic "Wake Up" - particles respond to the pull at different times
+                    // normalized based on their random delay
+                    // Widen the spread: 0.5 delay means half the time is spent "waiting" for the wave
+                    let wake = (t - pt.delay * 0.5) / 0.5;
+
+                    if (wake < 0) wake = 0;
+                    if (wake > 1) wake = 1;
+
+                    // Smooth transition into control
+                    const ep = wake * wake * (3 - 2 * wake); // smoothstep
+
+                    if (ep <= 0.01) {
+                        // Drift from burst momentum before pull takes over
+                        pt.vx_burst *= 0.95;
+                        pt.vy_burst = pt.vy_burst * 0.95 + 0.1; // gravity
+                        pt.x += pt.vx_burst;
+                        pt.y += pt.vy_burst;
+                    } else {
+                        // "Magnetic Fluid" Physics
+                        const dx = tx - pt.x;
+                        const dy = ty - pt.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        // 1. Attraction (Spring Force) - stronger as they get closer/later
+                        const k = 0.03 * ep + 0.02;
+                        const ax = dx * k;
+                        const ay = dy * k;
+
+                        // 2. Swirl (Tangential Force) - gives the spiral effect
+                        // Stronger in middle, weaker at end to allow snapping
+                        const swirlStr = Math.sin(ep * Math.PI) * 0.1;
+                        const vx_tan = -dy * swirlStr;
+                        const vy_tan = dx * swirlStr;
+
+                        // Integrate Forces
+                        pt.vx_burst = (pt.vx_burst * 0.85) + ax + vx_tan;
+                        pt.vy_burst = (pt.vy_burst * 0.85) + ay + vy_tan;
+
+                        // 3. Snap logic
+                        // If very close or near end of time, snap execution
+                        if (ep > 0.98 || (dist < 4 && ep > 0.8)) {
+                            pt.x = lerp(pt.x, tx, 0.4);
+                            pt.y = lerp(pt.y, ty, 0.4);
+                        } else {
+                            pt.x += pt.vx_burst;
+                            pt.y += pt.vy_burst;
+                        }
+                    }
+
+                    // Color & Size Morph
+                    const r = Math.floor(lerp(255, pt.tr, ep));
+                    const g = Math.floor(lerp(100, pt.tg, ep));
+                    const b = Math.floor(lerp(160, pt.tb, ep));
+                    const sz = lerp(pt.sz, pt.tsz, ep);
+
+                    drawMiniHeart(pt.x, pt.y, sz, `rgb(${r},${g},${b})`, 1);
+
+                    // Occasional sparkle on locking in
+                    if (ep > 0.9 && Math.random() > 0.97) {
+                        drawMiniHeartGlow(pt.x, pt.y, sz * 4, '#fff', 1, 10);
                     }
                 });
-                // Composite glow
-                ctx.save(); ctx.globalAlpha = .2 * (1 - p);
+
+                ctx.save(); ctx.globalAlpha = 0.3;
                 ctx.drawImage(bloomCanvas, 0, 0);
                 ctx.restore();
-                // Sparkling assembly effect
-                if (p > .3) {
-                    const sp = (p - .3) / .7;
-                    for (let i = 0; i < Math.floor(sp * 5); i++) {
-                        const sx = CX + (Math.random() - .5) * W * .45;
-                        const sy = CY + (Math.random() - .5) * H * .55;
-                        const ssz = Math.random() * 2.5 + .5;
-                        ctx.save();
-                        ctx.globalAlpha = Math.random() * .4 * sp;
-                        ctx.beginPath();
-                        // 4-point star
-                        const arms = 4;
-                        for (let a = 0; a < arms * 2; a++) {
-                            const angle = a / (arms * 2) * Math.PI * 2;
-                            const rad = a % 2 === 0 ? ssz * 3 : ssz * .5;
-                            const px = sx + Math.cos(angle) * rad;
-                            const py = sy + Math.sin(angle) * rad;
-                            a === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = 'rgba(255,220,240,.8)';
-                        ctx.fill();
-                        ctx.restore();
-                    }
-                }
             }
 
             // ═══════════════════════════════════════
@@ -3382,17 +3482,18 @@
                 if (currentPage !== 'page-heart-portrait') return;
                 ctx.clearRect(0, 0, W, H);
                 drawBg(0.25);
-                renderSparkles(0.7);
                 const now = Date.now() * .0006;
+
+                renderSparkles(0.7);
                 // Draw all particles at final positions
                 particles.forEach((pt, i) => {
                     const breath = Math.sin(now + i * .06) * .035 + 1;
-                    const shimmer = 1.06 + Math.sin(now * 2 + i * .15) * .08;
+                    const shimmer = 1.13 + Math.sin(now * 2 + i * .15) * .12;
                     drawMiniHeart(
                         pt.tx || pt.x, pt.ty || pt.y,
                         pt.tsz * breath,
                         `rgb(${Math.min(255, Math.floor(pt.tr * shimmer))},${Math.min(255, Math.floor(pt.tg * shimmer))},${Math.min(255, Math.floor(pt.tb * shimmer))})`,
-                        .94
+                        .98
                     );
                 });
                 // Premium vignette
@@ -3441,6 +3542,7 @@
                 }
                 heartPortraitAnimId = requestAnimationFrame(animate);
             }
+
 
             window.addEventListener('resize', () => {
                 if (currentPage !== 'page-heart-portrait') return;
